@@ -1,0 +1,59 @@
+scalar Unknown
+scalar DateTime
+scalar Address
+scalar AttachmentRef
+scalar Amount_Tokens
+scalar EthereumAddress
+scalar EmailAddress
+scalar Amount_Percentage
+scalar Date
+scalar URL
+scalar Amount_Money
+scalar OLabel
+scalar Currency
+scalar PHID
+scalar OID
+scalar Amount_Fiat
+scalar Amount_Currency
+scalar Amount_Crypto
+scalar Amount
+scalar Upload
+
+
+enum ReviewState { PROPOSED APPROVED REJECTED INVALIDATED }
+enum EffectKind { DOCUMENT_CHANGE PREPARE_MESSAGE SEND_MESSAGE WEBSITE_PUBLICATION }
+enum DeliveryStatus { ACCEPTED DELIVERED FAILED UNCERTAIN }
+type TargetRevision { documentRef: ID! revision: Int! contentHash: String! }
+type Proposal { version: Int! contentHash: String! contentRef: ID! contentVersion: Int! artifactHash: String! expiresAt: DateTime effectKind: EffectKind! action: String! targets: [TargetRevision!]! senderConnectionRef: ID recipients: [String!]! }
+type Decision { actorId: ID! occurredAt: DateTime! proposalHash: String! proposalVersion: Int! approved: Boolean! reason: String }
+type EffectReservation { operationId: ID! dispatchRef: ID! outboxRef: ID! occurredAt: DateTime! }
+type DeliveryEvidence { id: ID! status: DeliveryStatus! providerRef: ID! receiptRef: ID! occurredAt: DateTime! }
+
+type ExecutionClaim { operationId: ID! attemptId: ID! executorId: ID! occurredAt: DateTime! }
+
+type ReviewIntentState {
+revision: Int!
+ownerId: ID
+createdAt: DateTime
+updatedAt: DateTime
+
+reviewId: ID
+instanceId: ID
+scopeRef: ID
+proposal: Proposal
+status: ReviewState!
+decision: Decision
+invalidatedReason: String
+effect: EffectReservation
+execution: ExecutionClaim
+delivery: [DeliveryEvidence!]!
+
+}
+
+
+# v3 is a fresh Task proposal allocation, not an in-place effect-review upgrade.
+extend type ReviewIntentState { taskPlanJson: String }
+# taskPlanJson retains the bounded typed PlanHistory in src/task-delegation/proposal-contract.ts.
+input CreateTaskProposalInput { actorId: ID! occurredAt: DateTime! expectedRevision: Int! reviewId: ID! instanceId: ID! scopeRef: ID! versionJson: String! }
+input ReviseTaskProposalInput { actorId: ID! occurredAt: DateTime! expectedRevision: Int! baseVersion: Int! basePlanHash: String! versionJson: String! }
+input ApproveTaskProposalInput { actorId: ID! occurredAt: DateTime! expectedRevision: Int! version: Int! planHash: String! operationId: ID! dispatchId: ID! }

@@ -1,0 +1,91 @@
+import type { DocumentModelGlobalState } from "document-model";
+
+export const documentModel: DocumentModelGlobalState = {
+  id: "kapelle/dispatch",
+  name: "Dispatch",
+  author: {
+    name: "Chris Powers",
+    website: "https://kapelle.ai",
+  },
+  extension: "phdispatch",
+  description:
+    "Immutable scoped agent work instructions, requester/parent lineage, acceptance and original result references. Task status and external effects belong to their existing authorities.",
+  specifications: [
+    {
+      state: {
+        local: {
+          schema: "",
+          examples: [],
+          initialValue: "",
+        },
+        global: {
+          schema:
+            "\nenum DispatchPhase { OFFERED ACCEPTED CANCEL_REQUESTED RESULT_RECORDED }\ntype DispatchAgentRef { instanceId: ID! definitionId: ID! definitionVersion: String! definitionHash: String! }\ntype DispatchTaskRef { authorityRef: ID! taskRef: ID! commitmentHash: String! }\ntype DispatchSourceRef { documentRef: ID! documentType: String! contentVersion: Int! contentHash: String! }\ntype DispatchOffer { contentHash: String! scopeRef: ID! task: DispatchTaskRef! originalRequesterId: ID! senderId: ID! senderAgent: DispatchAgentRef recipient: DispatchAgentRef! parentDispatchRef: ID parentContentHash: String continuationOfRef: ID instructions: String! instructionsHash: String! sources: [DispatchSourceRef!]! permissionRef: ID! expiresAt: DateTime! }\ntype DispatchAcceptance { actorId: ID! inputHash: String! occurredAt: DateTime! }\ntype DispatchResultRef { reportId: ID! contentVersion: Int! contentHash: String! verificationRef: ID! occurredAt: DateTime! }\ntype DispatchState { revision: Int! ownerId: ID createdAt: DateTime updatedAt: DateTime dispatchId: ID scopeRef: ID offer: DispatchOffer phase: DispatchPhase! acceptance: DispatchAcceptance result: DispatchResultRef cancellationReason: String }\n",
+          examples: [],
+          initialValue:
+            '{"revision": 0, "ownerId": null, "createdAt": null, "updatedAt": null, "dispatchId": null, "scopeRef": null, "offer": null, "phase": "OFFERED", "acceptance": null, "result": null, "cancellationReason": null}',
+        },
+      },
+      modules: [
+        {
+          id: "dispatch-control",
+          name: "control",
+          description:
+            "Scoped immutable agent dispatch operations; service verifies every hop independently.",
+          operations: [
+            {
+              id: "dispatch-create-dispatch",
+              name: "CREATE_DISPATCH",
+              description: "Create dispatch",
+              schema:
+                "input CreateDispatchInput { actorId: ID! occurredAt: DateTime! expectedRevision: Int! dispatchId: ID! ownerId: ID! offer: DispatchOfferInput! }\ninput DispatchAgentRefInput { instanceId: ID! definitionId: ID! definitionVersion: String! definitionHash: String! }\ninput DispatchTaskRefInput { authorityRef: ID! taskRef: ID! commitmentHash: String! }\ninput DispatchSourceRefInput { documentRef: ID! documentType: String! contentVersion: Int! contentHash: String! }\ninput DispatchOfferInput { contentHash: String! scopeRef: ID! task: DispatchTaskRefInput! originalRequesterId: ID! senderId: ID! senderAgent: DispatchAgentRefInput recipient: DispatchAgentRefInput! parentDispatchRef: ID parentContentHash: String continuationOfRef: ID instructions: String! instructionsHash: String! sources: [DispatchSourceRefInput!]! permissionRef: ID! expiresAt: DateTime! }\n",
+              template: "",
+              reducer: "",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "dispatch-accept-dispatch",
+              name: "ACCEPT_DISPATCH",
+              description: "Accept dispatch",
+              schema:
+                "input AcceptDispatchInput { actorId: ID! occurredAt: DateTime! expectedRevision: Int! inputHash: String! }",
+              template: "",
+              reducer: "",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "dispatch-request-dispatch-cancel",
+              name: "REQUEST_DISPATCH_CANCEL",
+              description: "Request dispatch cancel",
+              schema:
+                "input RequestDispatchCancelInput { actorId: ID! occurredAt: DateTime! expectedRevision: Int! reason: String! }",
+              template: "",
+              reducer: "",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "dispatch-record-dispatch-result",
+              name: "RECORD_DISPATCH_RESULT",
+              description: "Record dispatch result",
+              schema:
+                "input RecordDispatchResultInput { actorId: ID! occurredAt: DateTime! expectedRevision: Int! inputHash: String! reportId: ID! contentVersion: Int! contentHash: String! verificationRef: ID! }",
+              template: "",
+              reducer: "",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+          ],
+        },
+      ],
+      version: 1,
+      changeLog: [],
+    },
+  ],
+};

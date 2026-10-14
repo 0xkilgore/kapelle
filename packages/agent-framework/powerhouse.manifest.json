@@ -1,0 +1,28 @@
+{
+  "name": "@kapelle/agent-framework-models",
+  "description": "Portable agent definitions, installed instance controls, and exact review/effect intents.",
+  "publisher": {},
+  "documentModels": [
+    {
+      "id": "kapelle/agent-definition",
+      "name": "Agent Definition"
+    },
+    {
+      "id": "kapelle/agent-instance",
+      "name": "Agent Instance"
+    },
+    {
+      "id": "kapelle/review-intent",
+      "name": "Review Intent"
+    },
+    {
+      "id": "kapelle/dispatch",
+      "name": "Dispatch"
+    }
+  ],
+  "apps": [],
+  "editors": [],
+  "processors": [],
+  "subgraphs": [],
+  "config": []
+}

@@ -1,0 +1,49 @@
+{
+  "name": "@kapelle/report-registry",
+  "version": "0.1.0",
+  "license": "AGPL-3.0-only",
+  "private": true,
+  "type": "module",
+  "description": "Source-neutral report registry and Kapelle attention projection spike.",
+  "exports": {
+    ".": "./src/index.ts",
+    "./task-publication": "./src/task-publication.ts",
+    "./private-publication": "./src/private-publication.ts",
+    "./document-models": "./document-models/index.ts",
+    "./manifest": "./powerhouse.manifest.json"
+  },
+  "bin": {
+    "report-registry": "./src/cli.ts"
+  },
+  "scripts": {
+    "test": "npm run test:registry && npm run test:model",
+    "test:registry": "node --disable-warning=ExperimentalWarning --experimental-strip-types --test tests/*.test.ts",
+    "test:model": "vitest run document-models/report-registry/v1/tests",
+    "typecheck:model": "tsc --noEmit",
+    "audit:runtime": "npm audit --omit=dev",
+    "smoke": "node --disable-warning=ExperimentalWarning --experimental-strip-types src/smoke.ts"
+  },
+  "engines": {
+    "node": ">=22.18"
+  },
+  "dependencies": {
+    "libsodium-wrappers": "0.7.15"
+  },
+  "devDependencies": {
+    "@powerhousedao/reactor-browser": "6.2.1",
+    "@types/node": "24.10.1",
+    "document-model": "6.2.1",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "typescript": "5.9.3",
+    "vite-tsconfig-paths": "6.1.1",
+    "vitest": "4.1.1",
+    "zod": "4.3.6"
+  },
+  "overrides": {
+    "deepmerge-ts": "8.0.2",
+    "kysely": "0.28.17",
+    "libsodium": "0.7.16",
+    "ws": "8.21.3"
+  }
+}

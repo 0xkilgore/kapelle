@@ -1,0 +1,46 @@
+scalar Unknown
+scalar DateTime
+scalar Address
+scalar AttachmentRef
+scalar Amount_Tokens
+scalar EthereumAddress
+scalar EmailAddress
+scalar Amount_Percentage
+scalar Date
+scalar URL
+scalar Amount_Money
+scalar OLabel
+scalar Currency
+scalar PHID
+scalar OID
+scalar Amount_Fiat
+scalar Amount_Currency
+scalar Amount_Crypto
+scalar Amount
+scalar Upload
+
+
+enum DispatchPhase { OFFERED ACCEPTED CANCEL_REQUESTED RESULT_RECORDED }
+type DispatchAgentRef { instanceId: ID! definitionId: ID! definitionVersion: String! definitionHash: String! }
+type DispatchTaskRef { authorityRef: ID! taskRef: ID! commitmentHash: String! }
+type DispatchSourceRef { documentRef: ID! documentType: String! contentVersion: Int! contentHash: String! }
+type DispatchOffer { contentHash: String! scopeRef: ID! task: DispatchTaskRef! originalRequesterId: ID! senderId: ID! senderAgent: DispatchAgentRef recipient: DispatchAgentRef! parentDispatchRef: ID parentContentHash: String continuationOfRef: ID instructions: String! instructionsHash: String! sources: [DispatchSourceRef!]! permissionRef: ID! expiresAt: DateTime! }
+type DispatchAcceptance { actorId: ID! inputHash: String! occurredAt: DateTime! }
+type DispatchResultRef { reportId: ID! contentVersion: Int! contentHash: String! verificationRef: ID! occurredAt: DateTime! }
+type DispatchState { revision: Int! ownerId: ID createdAt: DateTime updatedAt: DateTime dispatchId: ID scopeRef: ID offer: DispatchOffer phase: DispatchPhase! acceptance: DispatchAcceptance result: DispatchResultRef cancellationReason: String }
+
+
+# control
+
+input CreateDispatchInput { actorId: ID! occurredAt: DateTime! expectedRevision: Int! dispatchId: ID! ownerId: ID! offer: DispatchOfferInput! }
+input DispatchAgentRefInput { instanceId: ID! definitionId: ID! definitionVersion: String! definitionHash: String! }
+input DispatchTaskRefInput { authorityRef: ID! taskRef: ID! commitmentHash: String! }
+input DispatchSourceRefInput { documentRef: ID! documentType: String! contentVersion: Int! contentHash: String! }
+input DispatchOfferInput { contentHash: String! scopeRef: ID! task: DispatchTaskRefInput! originalRequesterId: ID! senderId: ID! senderAgent: DispatchAgentRefInput recipient: DispatchAgentRefInput! parentDispatchRef: ID parentContentHash: String continuationOfRef: ID instructions: String! instructionsHash: String! sources: [DispatchSourceRefInput!]! permissionRef: ID! expiresAt: DateTime! }
+
+
+input AcceptDispatchInput { actorId: ID! occurredAt: DateTime! expectedRevision: Int! inputHash: String! }
+
+input RequestDispatchCancelInput { actorId: ID! occurredAt: DateTime! expectedRevision: Int! reason: String! }
+
+input RecordDispatchResultInput { actorId: ID! occurredAt: DateTime! expectedRevision: Int! inputHash: String! reportId: ID! contentVersion: Int! contentHash: String! verificationRef: ID! }

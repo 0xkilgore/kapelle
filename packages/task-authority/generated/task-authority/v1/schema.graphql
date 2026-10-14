@@ -1,0 +1,184 @@
+scalar Unknown
+scalar DateTime
+scalar Address
+scalar AttachmentRef
+scalar Amount_Tokens
+scalar EthereumAddress
+scalar EmailAddress
+scalar Amount_Percentage
+scalar Date
+scalar URL
+scalar Amount_Money
+scalar OLabel
+scalar Currency
+scalar PHID
+scalar OID
+scalar Amount_Fiat
+scalar Amount_Currency
+scalar Amount_Crypto
+scalar Amount
+scalar Upload
+
+enum TaskStatus { OPEN SNOOZED BLOCKED DONE ARCHIVED }
+enum TaskPriority { HIGH MED LOW }
+enum TaskSource { HUMAN CLI AGENT PERSONAL_CRM MIGRATION }
+
+type TaskBlock {
+  reason: String!
+  setAt: DateTime!
+  setBy: String!
+  clearedAt: DateTime
+  clearedBy: String
+  resolution: String
+}
+
+type TaskComment {
+  id: ID!
+  bodyMarkdown: String!
+  addedAt: DateTime!
+  addedBy: String!
+}
+
+type TaskExternalRef {
+  id: ID!
+  authority: String!
+  opaqueId: String!
+  deepLink: String
+  addedAt: DateTime!
+  addedBy: String!
+}
+
+type TaskAuthorityState {
+  id: PHID
+  schemaVersion: Int!
+  title: String!
+  bodyMarkdown: String!
+  status: TaskStatus!
+  priority: TaskPriority
+  projectId: String
+  labels: [String!]!
+  ownerId: String!
+  assigneeId: String
+  dueAt: DateTime
+  snoozedUntil: DateTime
+  createdAt: DateTime
+  updatedAt: DateTime
+  completedAt: DateTime
+  archivedAt: DateTime
+  openBlock: TaskBlock
+  blockHistory: [TaskBlock!]!
+  comments: [TaskComment!]!
+  dependsOn: [PHID!]!
+  externalRefs: [TaskExternalRef!]!
+  source: TaskSource!
+  sourceRef: String
+  createdBy: String!
+  updatedBy: String!
+}
+
+# content
+
+input CreateTaskInput {
+  id: PHID!
+  title: String!
+  bodyMarkdown: String
+  projectId: String
+  dueAt: DateTime
+  priority: TaskPriority
+  labels: [String!]
+  ownerId: String!
+  assigneeId: String
+  source: TaskSource!
+  sourceRef: String
+  occurredAt: DateTime!
+  actorId: String!
+}
+
+input UpdateTitleInput { title: String! occurredAt: DateTime!
+  actorId: String!
+}
+
+input UpdateBodyInput { bodyMarkdown: String! occurredAt: DateTime!
+  actorId: String!
+}
+
+input SetProjectInput { projectId: String occurredAt: DateTime!
+  actorId: String!
+}
+
+input SetDueInput { dueAt: DateTime occurredAt: DateTime!
+  actorId: String!
+}
+
+input SetPriorityInput { priority: TaskPriority occurredAt: DateTime!
+  actorId: String!
+}
+
+input SetAssigneeInput { assigneeId: String occurredAt: DateTime!
+  actorId: String!
+}
+
+# lifecycle
+
+input CompleteTaskInput { resolution: String occurredAt: DateTime!
+  actorId: String!
+}
+
+input ReopenTaskInput { reason: String occurredAt: DateTime!
+  actorId: String!
+}
+
+input SnoozeTaskInput { snoozedUntil: DateTime! reason: String occurredAt: DateTime!
+  actorId: String!
+}
+
+input UnsnoozeTaskInput { occurredAt: DateTime!
+  actorId: String!
+}
+
+input BlockTaskInput { reason: String! occurredAt: DateTime!
+  actorId: String!
+}
+
+input UnblockTaskInput { resolution: String occurredAt: DateTime!
+  actorId: String!
+}
+
+input ArchiveTaskInput { reason: String occurredAt: DateTime!
+  actorId: String!
+}
+
+# context
+
+input AddLabelInput { label: String! occurredAt: DateTime!
+  actorId: String!
+}
+
+input RemoveLabelInput { label: String! occurredAt: DateTime!
+  actorId: String!
+}
+
+input AddCommentInput { id: ID! bodyMarkdown: String! occurredAt: DateTime!
+  actorId: String!
+}
+
+input AddDependencyInput { taskId: PHID! occurredAt: DateTime!
+  actorId: String!
+}
+
+input RemoveDependencyInput { taskId: PHID! occurredAt: DateTime!
+  actorId: String!
+}
+
+input AddExternalRefInput {
+  id: ID!
+  authority: String!
+  opaqueId: String!
+  deepLink: String
+  occurredAt: DateTime!
+  actorId: String!
+}
+
+input RemoveExternalRefInput { id: ID! occurredAt: DateTime!
+  actorId: String!
+}

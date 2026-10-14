@@ -1,0 +1,94 @@
+{
+  "header": {
+    "id": "e01d5448-5f65-4a23-8e86-f1840d33625f",
+    "sig": {
+      "nonce": "",
+      "publicKey": {}
+    },
+    "meta": {},
+    "name": "Synthetic review proof",
+    "slug": "e01d5448-5f65-4a23-8e86-f1840d33625f",
+    "branch": "main",
+    "revision": {
+      "document": 2,
+      "global": 8
+    },
+    "documentType": "kilgore/report",
+    "createdAtUtcIso": "2026-08-22T20:03:13.361Z",
+    "protocolVersions": {
+      "base-reducer": 2
+    },
+    "lastModifiedAtUtcIso": "2026-08-22T20:04:33.176Z"
+  },
+  "state": {
+    "auth": {},
+    "document": {
+      "hash": {
+        "encoding": "base64",
+        "algorithm": "sha1"
+      },
+      "version": 1
+    },
+    "global": {
+      "id": "synthetic-report-001",
+      "title": "Synthetic review proof",
+      "review": {
+        "readAt": "2026-08-22T20:04:01.000Z",
+        "feedback": [
+          {
+            "id": "feedback-proof-001",
+            "route": {
+              "error": null,
+              "status": "UNROUTED",
+              "routedAt": null,
+              "destination": null
+            },
+            "actorId": "reviewer-proof",
+            "createdAt": "2026-08-22T20:04:02.000Z",
+            "bodyMarkdown": "Please clarify the synthetic conclusion."
+          }
+        ],
+        "openedAt": "2026-08-22T20:04:00.000Z"
+      },
+      "content": {
+        "blobRef": null,
+        "storage": "INLINE_MARKDOWN",
+        "byteSize": 17,
+        "filename": "synthetic-proof.md",
+        "markdown": "# Synthetic proof",
+        "mimeType": "text/markdown",
+        "contentHash": "sha256:synthetic-proof"
+      },
+      "producer": {
+        "id": "codex-proof",
+        "kind": "AGENT",
+        "label": "Synthetic proof"
+      },
+      "revision": 8,
+      "attention": {
+        "reason": "Exercise resolve semantics",
+        "request": "DECIDE",
+        "reviewBy": null,
+        "expiresAt": null,
+        "reasonCode": "synthetic-proof",
+        "resolution": "RESOLVED",
+        "resolvedAt": "2026-08-22T20:05:03.000Z",
+        "requestedAt": "2026-08-22T20:05:02.000Z",
+        "requestedBy": "codex-proof"
+      },
+      "createdAt": "2026-08-22T20:03:00.000Z",
+      "createdBy": "codex-proof",
+      "familyRef": null,
+      "lifecycle": "FINAL",
+      "reportRef": "report://synthetic/review-proof",
+      "sourceRef": null,
+      "updatedAt": "2026-08-22T20:05:03.000Z",
+      "updatedBy": "reviewer-proof",
+      "projectRef": null,
+      "schemaVersion": 1,
+      "supersedesRef": null,
+      "supersededByRef": null
+    },
+    "local": {}
+  }
+}

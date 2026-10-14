@@ -1,0 +1,91 @@
+{
+  "schema": "report-unread-runtime-overlay.v1",
+  "observedAt": "2026-09-14T18:45:19.335767+00:00",
+  "targetRoot": "<registry-project-root>",
+  "sourceBase": "ef435780975c7268f42766d170da7403a0eb26df",
+  "files": [
+    {
+      "target": "document-models/report-registry/report-registry.json",
+      "source": "document-models/report-registry/report-registry.json",
+      "beforeSha256": "728097b35522d50b784be96913435f80d793882296b13060d560633ef88f45ee",
+      "afterSha256": "c3900abd08ea3c35b9329d346e8167379f9240261cca68697c2445fb346f38ce"
+    },
+    {
+      "target": "document-models/report-registry/v1/gen/attention/actions.ts",
+      "source": "document-models/report-registry/v1/gen/attention/actions.ts",
+      "beforeSha256": "9b7a3997f45938a9b436fd07c5c6ffce4f9772d3b55e751e22c0656ff4e989a8",
+      "afterSha256": "f2b233758c33d4709ec75516ae9ee3398aaf72385bf9a221631146c97d859549"
+    },
+    {
+      "target": "document-models/report-registry/v1/gen/attention/creators.ts",
+      "source": "document-models/report-registry/v1/gen/attention/creators.ts",
+      "beforeSha256": "7c106dc163b3dda234ac25fcb6990db7d65b0e70e6c2a367c000c622fc361dcb",
+      "afterSha256": "a1b700bf10207b26d596ec970c4e1f59aa044bb0b81a4e136b24f3123fc9a81d"
+    },
+    {
+      "target": "document-models/report-registry/v1/gen/attention/operations.ts",
+      "source": "document-models/report-registry/v1/gen/attention/operations.ts",
+      "beforeSha256": "72259850860e4f9a8740747184125a6f6151b2e282adc9419aa7aab2a0658947",
+      "afterSha256": "eb4a41887412f8d746bc2f8e8c8a06ae71c7500ad685f3177bf9631c9bbfc282"
+    },
+    {
+      "target": "document-models/report-registry/v1/gen/document-model.ts",
+      "source": "document-models/report-registry/v1/gen/document-model.ts",
+      "beforeSha256": "9ccd5687662ec93018ab6b033849ffa0afc4b92e93a67a1390200a3f1bfa516d",
+      "afterSha256": "9db76d519192591171e9a5461cb718a6d5d54f2472e8cf390a25cacf1d68ce97"
+    },
+    {
+      "target": "document-models/report-registry/v1/gen/reducer.ts",
+      "source": "document-models/report-registry/v1/gen/reducer.ts",
+      "beforeSha256": "957f43303a5b2c82575dda79c51f7c893cbfd46398fba6ebf61c53889d9f599b",
+      "afterSha256": "f00ee83eddad2556adb5f3c799a9cbd48557907b64850b0e2efce3dca534a715"
+    },
+    {
+      "target": "document-models/report-registry/v1/gen/schema/types.ts",
+      "source": "document-models/report-registry/v1/gen/schema/types.ts",
+      "beforeSha256": "14bd4ca9e3d1e6e0f085faa2c7efb7dae2bff48832675ab2cbfdbf7256289375",
+      "afterSha256": "f69f219db831aa4d000859594c1b507550fdbef6481ba5265cb51c684d3e216e"
+    },
+    {
+      "target": "document-models/report-registry/v1/gen/schema/zod.ts",
+      "source": "document-models/report-registry/v1/gen/schema/zod.ts",
+      "beforeSha256": "cfd8fe9a7f66bf887b6e46453634f9b2fa0788d377c8813a3f4ed4e846b29bab",
+      "afterSha256": "4e1aa90b299aa8fe82d6c8429ed9c04c16ebd25981389dcc5d06d734ea4fca60"
+    },
+    {
+      "target": "document-models/report-registry/v1/schema.graphql",
+      "source": "document-models/report-registry/v1/schema.graphql",
+      "beforeSha256": "29dff2d5dffe2a0ff9bbcf434457f4fb8d704b54061c58ac7b74362735ce462c",
+      "afterSha256": "4f1761efc4d75192bea0528c71cae5481d6818d6e3a4de83fe6b20d42a0adb34"
+    },
+    {
+      "target": "document-models/report-registry/v1/src/reducers/attention.ts",
+      "source": "deploy/report-unread-runtime/attention.ts",
+      "beforeSha256": "b141b80823ba655118e56218e77e6f1fd1858583a51a00135bb41ef58a648ec5",
+      "afterSha256": "5877e1ea878641933415d924b4fb0862d1ee0e6639785fc3078f5a20eb60fb9d"
+    },
+    {
+      "target": "deploy/mcp-auth-proxy.ts",
+      "source": "deploy/mcp-auth-proxy.ts",
+      "beforeSha256": "910e66ead2d97136f1d99991f4276255e0996e7b4ace6ab2278cf4b723595926",
+      "afterSha256": "01f1e8b8152bdc1c7f5d19d5ced5a4d305f73649481c18ad99aeb447b1a77817"
+    }
+  ],
+  "existingReducerBodiesPreserved": true,
+  "oldSpecificationSemanticallyPreserved": true,
+  "forbiddenTargets": [
+    "var",
+    "node_modules",
+    "powerhouse.manifest.json",
+    "powerhouse.config.json",
+    "package.json",
+    "index.ts",
+    "document-models/index.ts",
+    "document-models/document-models.ts",
+    "document-models/upgrade-manifests.ts",
+    "document-models/task-authority",
+    "deploy/docker-compose.yml",
+    "src/model.ts"
+  ],
+  "rollback": "After MARK_UNREAD may have been written, retain additive native code; roll console back or roll forward. Never restore old native code against unread history."
+}

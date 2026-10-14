@@ -1,0 +1,43 @@
+{
+  "name": "@kapelle/agent-framework-models",
+  "version": "0.1.0",
+  "license": "AGPL-3.0-only",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./document-models": "./document-models/index.ts",
+    "./manifest": "./powerhouse.manifest.json",
+    "./service": "./src/service/index.ts",
+    "./worker": "./src/worker/index.ts",
+    "./task-worker": "./src/task-delegation/worker-index.ts",
+    "./task-generation": "./src/task-delegation/generation-index.ts",
+    "./publication": "./src/publication/index.ts",
+    "./dispatch": "./src/dispatch/index.ts",
+    "./publication/adapters": "./src/publication/adapters.ts"
+  },
+  "scripts": {
+    "generate": "ph-cli generate all",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@powerhousedao/reactor-browser": "6.2.1",
+    "document-model": "6.2.1",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "zod": "4.3.6"
+  },
+  "devDependencies": {
+    "@powerhousedao/ph-cli": "6.2.1",
+    "@powerhousedao/reactor": "6.2.1",
+    "@types/node": "24.10.1",
+    "esbuild": "0.14.54",
+    "typescript": "5.9.3",
+    "vite-tsconfig-paths": "6.1.1",
+    "vitest": "4.1.1"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  }
+}
