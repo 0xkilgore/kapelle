@@ -1,119 +1,68 @@
 # Kapelle
 
-Kapelle is a personal agent platform built on [Powerhouse](https://github.com/powerhouse-inc/powerhouse) document models. You approve a Task, an agent does the work, and you get back a Report whose identity and exact bytes the system checks before it records the result. Approval is required before any agent runs. Each Dispatch records which Report its approved execution produced. Nothing outside the system changes unless you approve that change separately.
+Kapelle is an owner-approval-first agent platform: an agent works from an organization's files, proposes work, and produces drafts people can review. The platform records what was approved, what ran, and what result came back. Approval for a draft is separate from permission to send or publish it.
 
-This repository is a curated, readable snapshot of the code behind that loop. It is not a hosted service and not a turnkey install. The private deployment it came from runs on the author's own machines. What that means for running it is covered in [docs/STATUS.md](docs/STATUS.md#running-it).
+**As of October 26, 2026: one live organization deployment, the Cleveland Park agent.** Its three jobs are website updates through reviewed pull requests, newsletter drafting with previews and test emails, and preparing meeting notes and agendas. Team tasks, weekly schedules, an approved agent handbook and a runtime-generated system map support those jobs. The three-job Home navigation is live in Cleveland Park, deployed October 26 at 16:04 UTC.
 
-## The thesis: document models as the ledger for agent work
+**This public repository is an earlier source snapshot, not the current hosted app.** You can inspect its architecture and run its component tests. Cloning it does not give you the Cleveland Park deployment or a self-service agent-hosting product.
 
-An agent's reasoning is not deterministic. Its authority and the state changes it makes should be.
+## What is available where?
 
-Most agent systems let a model write rows or overwrite files, then try to reconstruct what happened from logs. Kapelle instead gives agents, and the people supervising them, a **constrained vocabulary of typed operations** on event-sourced documents:
-
-- **Typed operations.** A Task, a Dispatch (one authorized execution), a ReviewIntent (a proposal and the owner's decision) and a Report each have a closed set of operations with generated schemas. Unknown input is rejected.
-- **Reducers.** Deterministic reducers validate every operation and make the resulting state reproducible under a pinned model version. No reducer reads the clock, network, filesystem or a model.
-- **Provenance.** The Dispatch records the Report it produced: Report ID, input hash, producing agent and the SHA-256 of the exact bytes. It records them only after a separate reader credential has read the Report back and matched every field. A plausible-looking document with a matching title proves nothing; that binding does. This is verification by the owner's own system, not third-party attestation. Reports are not signed. The Registry's producer credential is a role, not a per-Task capability (see [STATUS](docs/STATUS.md#what-is-not-built)).
-- **Approval as a gate.** The owner approves an *exact* proposal version and hash, and approval creates the Dispatch. A language model can propose; it cannot grant itself authority. The console authenticates the owner either through the private network (an identity header bound to one host) or with a scoped token, so approval is only as strong as that boundary.
-
-The documents are the ledger. Much of the safety comes from the protocol around them: durable claims before a model call, an fsynced intent before a remote write, independent readback, a deploy lock and an authorization proxy. Document models make the consequential state changes inspectable, replayable and subject to invariants. They don't make an LLM reproducible, and they don't remove the need for authorization, concurrency control or careful handling of external effects. Effects such as deploying a website need their own adapters and evidence, and Kapelle keeps them outside the agent's authority.
-
-## What is proven
-
-**Proven once, live, on earlier revisions of this code.** One owner-approved Task ran end to end (N = 1). This snapshot is the release candidate that includes the fixes that run surfaced. It has not itself run a live Task. Two steps of the chain below are **not in this repository**: inbox capture (it processes personal mail) and the final website deploy, which the owner applied by hand as a separate reviewed step.
-
-```
-inbox message → Task → owner approval → one agent run → hash-verified Report → reviewed change applied to a live website
-```
-
-1. A request arrived in the owner's inbox and became a Task. *(Inbox pipeline not in this repo.)*
-2. The owner approved one exact, saved plan. Approval produced one Dispatch.
-3. One agent run (no tools, pinned model and budget) produced a result: a concrete website change, with cited sources and a patch.
-4. The publisher wrote the result to the Report Registry as a Report bound to that Dispatch. It then read the Report back with a separate credential and checked identity, provenance and content hash. Only then was the result recorded on the Dispatch.
-5. A separate review checked that the retrieved content hash matched, that the patch applied to the pinned source, and that the resulting data was valid.
-6. The owner then applied the change by hand, as a separate approved step outside this code. It shipped to a live community website. The diff against the previously live version was exactly the new entry and its image.
-
-The agent never had authority to deploy. The system kept enough identity and evidence to show which authorized execution produced which durable result, and the downstream change was reviewed on its own.
-
-At the time, the live Registry held about 2,450 Reports and 15,000 operations in a store of roughly 400 MB. That scale exposed most of the problems described in [docs/STATUS.md](docs/STATUS.md#known-limits).
-
-## Status at a glance
-
-| Component | Status | Notes |
+| | Available now | Boundary |
 |---|---|---|
-| Report document model (content, lifecycle, attention reducers) | ![BUILT](https://img.shields.io/badge/-BUILT-2ea44f) | Runs in the live Registry. This snapshot includes the newer model version that adds publication metadata; the live Registry still runs the previous version. |
-| Task, Dispatch, ReviewIntent, AgentDefinition, AgentInstance models | ![BUILT](https://img.shields.io/badge/-BUILT-2ea44f) | Generated with Powerhouse `ph-cli` 6.2.1, with authored reducers and tests. |
-| Framework: command boundary, approval → Dispatch, one-run worker | ![BUILT](https://img.shields.io/badge/-BUILT-2ea44f) | Ran in the single live pilot (earlier revision). |
-| Publisher: durable intent, reconciliation, verified readback | ![BUILT](https://img.shields.io/badge/-BUILT-2ea44f) | Ran in the single live pilot (earlier revision). |
-| Model admission and deployment fence | ![BUILT](https://img.shields.io/badge/-BUILT-2ea44f) | Tested against an isolated real Registry. Not yet deployed. |
-| Registry scale bridge (point reads, native publication lookup) | ![IN PROGRESS](https://img.shields.io/badge/-IN%20PROGRESS-dbab09) | Measured on synthetic data: publish + independent readback in 6.3–8.4 s at 1,000 and 2,500 Reports, with zero full-Drive listings. Awaiting deployment. |
-| Console delegation UX (single "Approve and start", status, history) | ![IN PROGRESS](https://img.shields.io/badge/-IN%20PROGRESS-dbab09) | Built on the release branch. Owner acceptance pending. |
-| Single-machine deployment, immutable releases | ![IN PROGRESS](https://img.shields.io/badge/-IN%20PROGRESS-dbab09) | In rehearsal. |
-| PGlite → Postgres, indexed lookups, Drive partitioning | ![PLANNED](https://img.shields.io/badge/-PLANNED-6e7781) | See [docs/ROADMAP.md](docs/ROADMAP.md). |
-| Agent management through the console and chat | ![PLANNED](https://img.shields.io/badge/-PLANNED-6e7781) | Watching and cancelling from chat are built. Proposing work from chat is not. |
+| **Public repository** | Powerhouse Task, Dispatch, ReviewIntent, AgentDefinition, AgentInstance and Report models; delegation worker; publication protocol; Registry proxy/read bridge; console slice; tests | Curated October 14 snapshot. Not a complete runnable website or turnkey deployment. |
+| **Private live deployment** | One organization's chat, source citations, website proposals/PR workflow, newsletter drafts/preview/test, meeting preparation, team tasks, weekly schedules, handbook and system map | Access is for admitted members. The hosted runtime and its deployment tooling are not included in this public snapshot. |
+| **Next work** | Shared file library and public image hosting; a complete flyer-to-event workflow; enabling full-list newsletter sending | Not advertised as available in the public repo or as completed live workflows. Some supporting code exists behind gates. |
 
-A **Drive** is Powerhouse's container document that lists member documents (here, Reports). Full detail and known limits are in [docs/STATUS.md](docs/STATUS.md).
+The current product has moved beyond the snapshot's original single-owner rehearsal. The repository has not yet caught up with that product. Its older status and roadmap documents describe the snapshot, not today's hosted deployment.
 
-## Quick tour
+## How the Cleveland Park agent works
 
-| Read | To understand |
-|---|---|
-| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Components, data flow, the publication protocol, fences and read paths |
-| [docs/CODE-MAP.md](docs/CODE-MAP.md) | Where to start reading, in order |
-| [docs/STATUS.md](docs/STATUS.md) | What's built, what isn't, known limits, how to run the tests |
-| [docs/ROADMAP.md](docs/ROADMAP.md) | What comes next |
-| [SOURCES.md](SOURCES.md) | Where every file came from (source repository and commit) |
+- **Website:** a reviewer proposes and checks a content change. Approval opens a draft GitHub pull request with a preview; a human maintainer merges it. The agent does not independently publish the site.
+- **Newsletter:** a member works through a draft plan, previews the rendered newsletter and asks for revisions. Authorized reviewers can send a test to their own sign-in address. Full-list sending is not enabled in the deployment described here.
+- **Meetings:** the agent prepares agendas and notes from supplied material and approved sources. Citations let people inspect the source; they do not guarantee a correct interpretation.
+- **Team tasks:** a reviewer approves an exact plan, sources and budget. The bounded runner claims that run once and checks the saved result against the bytes it produced. A person reviews it and marks the task done. An uncertain attempt is held for reconciliation, not automatically replayed.
+- **Schedules:** a reviewer approves a weekly template, source rule, expiry and spending limits. Each occurrence freezes its inputs. Changes to pinned behavior or the handbook pause affected schedules for review.
+- **Context:** the handbook describes the organization, tone and working rules. The system map describes the files and features available to that run. Neither grants tools or permissions.
 
-Repository layout:
+The hosted implementation uses a shared web hub and a separate organization runtime with a local SQLite authority, bounded tools and server-held connector credentials. It is not a deployment of the entire earlier Reactor stack per organization. Before a behavior-changing release is enabled, the project uses offline checks and scoped live qualification with synthetic cases and pinned evidence.
 
-```
-packages/
-  report-registry/   Report document model, the publisher, the Registry auth proxy and read bridge
-  agent-framework/   Agent, Dispatch and ReviewIntent models; command boundary; Task delegation worker
-  task-authority/    Task document model and its command gateway
-console/             The Next.js console slice for Task delegation and verified Report reads
-scripts/
-  report-publication/  Owner-scoped publication journal (Python), used by the console's publish path
-docs/
-```
+## Why document models still matter
 
-If you have ten minutes:
+Kapelle began with [Powerhouse document models](https://github.com/powerhouse-inc/powerhouse): typed operations and deterministic reducers for Tasks, approvals, Dispatches and Reports. The public code shows that work directly.
 
-1. Read the [delegation sequence](docs/ARCHITECTURE.md#the-delegated-task-step-by-step).
-2. Read the [worker contract](packages/agent-framework/src/task-delegation/WORKER.md).
-3. Read the [Report reducer](packages/report-registry/document-models/report-registry/v1/src/reducers/content.ts), the [Dispatch reducer](packages/agent-framework/document-models/dispatch/v1/src/reducers/control.ts) and the [publication validator](packages/report-registry/document-models/report-registry/v1/src/publication.ts).
+The durable idea is the separation between model output and authority. An LLM can propose a change; it cannot approve its own permissions. An exact approved version, a single-run claim, a durable write intent and a checked result make the work inspectable. The hosted implementation carries those principles into its organization runtime; it does not make LLM reasoning deterministic.
 
-The protocol code ([publisher](packages/report-registry/src/task-publication.ts), [worker](packages/agent-framework/src/task-delegation/worker.ts)) is dense and defensive. Read it after the prose.
+## What you can run now
 
-## Quick start
-
-Each package is independent. Run each line from the repository root. You need Node 24 (tested with 24.18) and Python 3 for the journal.
+The public packages have independent test suites. Use Node 24 (the snapshot was tested with 24.18) and Python 3. From the repository root:
 
 ```sh
-# Report Registry: publisher, proxy and read bridge (196 tests) and document model (37 tests)
 (cd packages/report-registry && npm ci --legacy-peer-deps --ignore-scripts && npm test)
 
-# Framework: several tests spawn TypeScript child processes, so they need a tsx loader
 (cd packages/agent-framework && npm ci --legacy-peer-deps --ignore-scripts && npm install --no-save tsx@4.22.4 \
   && KAPELLE_WORKER_HOST_TSX="$PWD/node_modules/tsx/dist/loader.mjs" npm test)
 
-# Task Authority
 (cd packages/task-authority && npm ci --legacy-peer-deps --ignore-scripts && npm test)
-
-# Console slice and the Python publication journal
 (cd console && npm ci && npm test)
 (cd scripts/report-publication && python3 -m unittest test_store.py)
 ```
 
-Expected result: everything passes, and 174 Framework tests skip because they need private infrastructure. See [STATUS](docs/STATUS.md#test-results).
+These are the snapshot's documented test commands, not a hosted-app install. Dependency installation needs network access; the suites use fixtures, fake providers and local listeners. Some Framework tests require private infrastructure and skip in the public snapshot; process restrictions can affect other tests. See [snapshot status](docs/STATUS.md) for its recorded results. These commands were not rerun for this README refresh.
 
-These suites are offline. They use synthetic fixtures, an in-process Reactor where needed, fake model adapters, and loopback listeners that the tests start themselves. No test calls a model provider or a remote service. The npm installs need network access.
+## Where to read
 
-## Built on Powerhouse
+- [Architecture](docs/ARCHITECTURE.md): the original delegation and publication protocols.
+- [Code map](docs/CODE-MAP.md): entry points into the public code.
+- [Status](docs/STATUS.md): snapshot coverage and omissions.
+- [Sources](SOURCES.md): file provenance and source revisions.
 
-Kapelle uses Powerhouse's document-model stack: `document-model`, Reactor, `ph-cli` / Vetra code generation, and Drives, at version 6.2.1 throughout. The generated `gen/` directories under each document model are `ph-cli` output and keep Powerhouse's generated structure. Powerhouse is licensed AGPL-3.0, and so is this repository.
+## Limits
 
-The engineering feedback in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md#what-hurt-and-what-would-help) is written for the Powerhouse team. It covers what worked, what hurt at about 2,500 Reports, and what native support would remove the most custom code.
+This is one live organization, not evidence of reliable operation across a fleet. Setup and operations remain assisted. Drafts can omit or alter details and need human review. A matching hash proves saved-byte identity, not factual truth. Qualification covers specified cases, not every future input. External sends and deployments need their own approval and recovery rules.
 
 ## License
 
-[AGPL-3.0](LICENSE). Copyright © 2026 Chris Powers.
+The public source is [AGPL-3.0](LICENSE); package manifests specify **AGPL-3.0-only**. Third-party components retain their own licenses and attribution. This README does not change the license or imply that private deployment code has been published.
+
+Project site: [kapelle.ai](https://kapelle.ai). To talk about launching an agent for your organization: [caneyfork.co](https://caneyfork.co).
