@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "rootDir": ".",
+    "paths": {
+      "document-models": ["./document-models/index.ts"],
+      "document-models/*": ["./document-models/*/index.ts"]
+    },
+    "module": "nodenext",
+    "moduleDetection": "force",
+    "target": "esnext",
+    "jsx": "react-jsx",
+    "types": ["node", "vitest/globals"],
+    "lib": ["ESNext", "dom", "dom.iterable"],
+    "strict": true,
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "noUncheckedSideEffectImports": true,
+    "skipLibCheck": true,
+    "noEmit": true
+  },
+  "include": ["document-models/**/*.ts", "document-models/**/*.json", "vitest.config.ts"],
+  "exclude": ["dist", "node_modules"]
+}

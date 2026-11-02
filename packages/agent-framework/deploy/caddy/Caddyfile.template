@@ -1,0 +1,52 @@
+# Caddy (NEW DEPENDENCY: owner OK required) terminates HTTPS with automatic certificates and proxies to the hub on loopback.
+# Replace {{DOMAIN}} and {{ACME_EMAIL}}. The hub sets CSP / no-store / nosniff itself; Caddy adds HSTS only.
+{
+	email {{ACME_EMAIL}}
+}
+
+{{DOMAIN}} {
+	encode gzip
+	header Strict-Transport-Security "max-age=31536000"
+	# IMAGES-V1 (CP live bug, Oct 23: a flyer upload got Caddy's 413 at 1 MB). ONLY the image upload route, a raw PUT of the
+	# file to /o/<org>/upload/im_<32 hex> (the hub's own route pattern), may carry up to 4 MiB = the hub's own image cap
+	# (Hub.MAX_IMAGE_BYTES, refused by Content-Length before a byte is read). Every other request keeps 1 MB.
+	@imageUpload {
+		method PUT
+		path_regexp ^/o/[a-z0-9][a-z0-9-]{1,62}/upload/im_[a-f0-9]{32}$
+	}
+	@notImageUpload {
+		not {
+			method PUT
+			path_regexp ^/o/[a-z0-9][a-z0-9-]{1,62}/upload/im_[a-f0-9]{32}$
+		}
+	}
+	request_body @imageUpload {
+		max_size 4MiB
+	}
+	request_body @notImageUpload {
+		max_size 1MB
+	}
+	reverse_proxy 127.0.0.1:8700
+	# A body over the limit is answered as the app's own JSON refusal (plain words in the UI), never an empty 413.
+	handle_errors {
+		@imageTooLarge {
+			expression {http.error.status_code} == 413
+			path_regexp ^/o/[a-z0-9][a-z0-9-]{1,62}/upload/im_[a-f0-9]{32}$
+		}
+		@tooLarge expression {http.error.status_code} == 413
+		header @tooLarge Content-Type application/json
+		respond @imageTooLarge `{"ok":false,"error":"image_too_large"}` 413
+		respond @tooLarge `{"ok":false,"error":"hub_body_too_large"}` 413
+	}
+}
+# FILES-HOST-BEGIN (LIBRARY L2, Fable R-1): the shared drive's public image host. The hub answers this host with published drive
+# images ONLY (GET/HEAD, no session code). install.sh renders this block only when hub-config filesHost is set, replacing
+# {{FILES_HOST}}; without it, it deletes every line from FILES-HOST-BEGIN through FILES-HOST-END (the rest is then byte-identical).
+{{FILES_HOST}} {
+	header Strict-Transport-Security "max-age=31536000"
+	request_body {
+		max_size 1KB
+	}
+	reverse_proxy 127.0.0.1:8700
+}
+# FILES-HOST-END

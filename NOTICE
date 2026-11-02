@@ -1,0 +1,22 @@
+Kapelle
+Copyright (C) 2026 the Kapelle authors. Licensed under the GNU Affero General Public License v3.0 only (see LICENSE).
+
+This repository includes or depends on third-party material:
+
+- packages/agent-framework/src/vendor/qrcodegen
+  QR Code generator library (TypeScript), Copyright (c) Project Nayuki, MIT License.
+  https://www.nayuki.io/page/qr-code-generator-library ; the license text is vendored beside the code.
+
+- packages/agent-framework/decoder
+  An image decoder process. Its npm dependencies are pinned in its package-lock.json and listed with licenses in
+  decoder/SOURCES.md: sharp (Apache-2.0), libvips via @img/sharp-libvips (LGPL-3.0-or-later, dynamically loaded),
+  and small MIT/ISC/Apache-2.0/0BSD helpers.
+
+- Powerhouse packages (document-model, @powerhousedao/*), AGPL-3.0, installed from npm. Generated document-model code
+  (document-models/**/gen/**) is produced by Powerhouse ph-cli from this repository's specifications.
+
+Each package's own dependencies and their licenses are recorded in that package's package-lock.json.
+
+- packages/agent-framework/src/agent-kit/local-mlx/vendor/pi
+  Pi agent loop + pi-ai helpers, Copyright (c) 2025 Mario Zechner, MIT License. https://github.com/earendil-works/pi
+  Upstream commit and per-file provenance in that directory's SOURCES.md; the license text is vendored beside the code.

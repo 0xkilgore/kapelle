@@ -1,0 +1,65 @@
+scalar Unknown
+scalar DateTime
+scalar Address
+scalar AttachmentRef
+scalar Amount_Tokens
+scalar EthereumAddress
+scalar EmailAddress
+scalar Amount_Percentage
+scalar Date
+scalar URL
+scalar Amount_Money
+scalar OLabel
+scalar Currency
+scalar PHID
+scalar OID
+scalar Amount_Fiat
+scalar Amount_Currency
+scalar Amount_Crypto
+scalar Amount
+scalar Upload
+
+
+type VersionedRef { id: ID! version: String! contentHash: String! }
+
+enum Requirement { REQUIRED OPTIONAL }
+type CapabilityDeclaration { id: ID! requirement: Requirement! resourceType: String! actions: [String!]! outputTypes: [String!]! }
+type ModelDependency { documentType: String! version: Int! }
+type MigrationDeclaration { fromVersion: String! migrationRef: VersionedRef! compatibilityFixtureRef: VersionedRef! }
+type ViewDeclaration { id: ID! codeRef: VersionedRef! }
+type DefinitionRelease {
+ definitionId: ID! packageVersion: String! schemaVersion: Int! publisherRef: ID! licenseRef: String! contentHash: String!
+ previousVersionRef: VersionedRef title: String! description: String! tags: [String!]! avatarRef: ID examples: [String!]! instructionTokenCount: Int tokenizerRef: String purpose: String! responsibilities: [String!]!
+ instructions: VersionedRef! skills: [VersionedRef!]! capabilities: [CapabilityDeclaration!]!
+ runtimeContracts: [String!]! modelProfiles: [String!]! documentModels: [ModelDependency!]!
+ migrations: [MigrationDeclaration!]! views: [ViewDeclaration!]! exportRequirements: [String!]! qualificationFixtures: [VersionedRef!]!
+}
+
+type AgentDefinitionState {
+revision: Int!
+ownerId: ID
+createdAt: DateTime
+updatedAt: DateTime
+release: DefinitionRelease
+}
+
+# control
+
+input PublishDefinitionInput {
+ actorId: ID!
+ occurredAt: DateTime!
+ expectedRevision: Int!
+release: DefinitionReleaseInput!
+}
+input VersionedRefInput { id: ID! version: String! contentHash: String! }
+input CapabilityDeclarationInput { id: ID! requirement: Requirement! resourceType: String! actions: [String!]! outputTypes: [String!]! }
+input ModelDependencyInput { documentType: String! version: Int! }
+input MigrationDeclarationInput { fromVersion: String! migrationRef: VersionedRefInput! compatibilityFixtureRef: VersionedRefInput! }
+input ViewDeclarationInput { id: ID! codeRef: VersionedRefInput! }
+input DefinitionReleaseInput {
+ definitionId: ID! packageVersion: String! schemaVersion: Int! publisherRef: ID! licenseRef: String! contentHash: String!
+ previousVersionRef: VersionedRefInput title: String! description: String! tags: [String!]! avatarRef: ID examples: [String!]! instructionTokenCount: Int tokenizerRef: String purpose: String! responsibilities: [String!]!
+ instructions: VersionedRefInput! skills: [VersionedRefInput!]! capabilities: [CapabilityDeclarationInput!]!
+ runtimeContracts: [String!]! modelProfiles: [String!]! documentModels: [ModelDependencyInput!]!
+ migrations: [MigrationDeclarationInput!]! views: [ViewDeclarationInput!]! exportRequirements: [String!]! qualificationFixtures: [VersionedRefInput!]!
+}

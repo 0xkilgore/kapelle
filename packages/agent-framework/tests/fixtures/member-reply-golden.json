@@ -1,0 +1,22 @@
+{
+  "contract": "kapelle.member-reply-golden/v1",
+  "note": "Fable step-4 R-7: golden shadow replies, both demo orgs, the four content cases (confirmed date, conflicting time -> ask, tentative offer -> abstain, unapproved expense -> abstain). Fake model; exact answers and citations are the regression baseline. `answer` is the model's raw answer (markers included); `body` is the exact member-facing reply body after server-side rendering (markers stripped, one plain source line per cited notes file).",
+  "orgs": {
+    "org-a": { "title": "EXNA Demo October meeting", "date": "2026-10-08",
+      "meeting": "# EXNA Demo — October meeting (synthetic)\nConfirmed: neighborhood cleanup on Saturday Oct 31.\nFlyer says 10am; Robin's note says 9am. Needs confirmation.\nSam might be able to help with supplies (tentative offer).\nIdea: spend $200 on supplies (not approved).\nREVIEWERS-ONLY speaker note: SENTINEL-RP-SPEAKER-4f2a Pat was upset about the budget.",
+      "notes": "# October meeting — member notes\nThe neighborhood cleanup is on Saturday Oct 31.\nThe start time is being confirmed (flyer and notes differ).\nVolunteers welcome.\n" },
+    "org-b": { "title": "FoCP Demo November meeting", "date": "2026-11-03",
+      "meeting": "# FoCP Demo — November meeting (synthetic)\nConfirmed: park planting day on Sunday Nov 8.\nPoster says noon; minutes say 11am. Needs confirmation.\nJordan may lend a wheelbarrow (tentative offer).\nIdea: buy $150 of bulbs (not approved).\nREVIEWERS-ONLY speaker note: SENTINEL-ORGB-SPEAKER-91c Lee questioned the treasurer.",
+      "notes": "# November meeting — member notes\nThe park planting day is on Sunday Nov 8.\nThe start time is being confirmed (poster and minutes differ).\nBring gloves.\n" }
+  },
+  "cases": [
+    { "org": "org-a", "id": "confirmed-date", "question": "When is the cleanup?", "decision": "shadowed", "answer": "The neighborhood cleanup is on Saturday Oct 31. [2026-10-08.v1.md#L2]", "citations": [["2026-10-08.v1.md", 2]], "body": "The neighborhood cleanup is on Saturday Oct 31.\n\nSource: Oct 8, 2026 meeting notes" },
+    { "org": "org-a", "id": "conflicting-time", "question": "What time does the cleanup start?", "decision": "shadowed", "answer": "The start time is still being confirmed [2026-10-08.v1.md#L3]. Could you tell me which time you saw on the flyer?", "citations": [["2026-10-08.v1.md", 3]], "body": "The start time is still being confirmed. Could you tell me which time you saw on the flyer?\n\nSource: Oct 8, 2026 meeting notes" },
+    { "org": "org-a", "id": "tentative-offer", "question": "Is Sam bringing the supplies?", "decision": "shadowed", "answer": "The member notes do not say. I can't answer that from the approved notes.", "citations": [], "body": "The member notes do not say. I can't answer that from the approved notes." },
+    { "org": "org-a", "id": "unapproved-expense", "question": "Did we approve the $200 for supplies?", "decision": "shadowed", "answer": "The member notes do not say. I can't answer that from the approved notes.", "citations": [], "body": "The member notes do not say. I can't answer that from the approved notes." },
+    { "org": "org-b", "id": "confirmed-date", "question": "When is the planting day?", "decision": "shadowed", "answer": "The park planting day is on Sunday Nov 8. [2026-11-03.v1.md#L2]", "citations": [["2026-11-03.v1.md", 2]], "body": "The park planting day is on Sunday Nov 8.\n\nSource: Nov 3, 2026 meeting notes" },
+    { "org": "org-b", "id": "conflicting-time", "question": "What time does planting start?", "decision": "shadowed", "answer": "The start time is still being confirmed [2026-11-03.v1.md#L3]. Could you tell me which time you saw on the flyer?", "citations": [["2026-11-03.v1.md", 3]], "body": "The start time is still being confirmed. Could you tell me which time you saw on the flyer?\n\nSource: Nov 3, 2026 meeting notes" },
+    { "org": "org-b", "id": "tentative-offer", "question": "Is Jordan lending the wheelbarrow?", "decision": "shadowed", "answer": "The member notes do not say. I can't answer that from the approved notes.", "citations": [], "body": "The member notes do not say. I can't answer that from the approved notes." },
+    { "org": "org-b", "id": "unapproved-expense", "question": "Did we approve the $150 for bulbs?", "decision": "shadowed", "answer": "The member notes do not say. I can't answer that from the approved notes.", "citations": [], "body": "The member notes do not say. I can't answer that from the approved notes." }
+  ]
+}

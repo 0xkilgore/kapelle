@@ -1,0 +1,7 @@
+{
+  "path": "node_modules/@powerhousedao/reactor/dist/index.js",
+  "sha256": "a5cec8ff8def57f2c23235a01a1ece4969acb23cde98ae4cd026ac0dd788c241",
+  "method": "\tasync getOutgoingRelationships(sourceIdentifier, relationshipType, view, paging, signal) {\n\t\tthis.logger.verbose(\"getOutgoingRelationships(@sourceIdentifier, @relationshipType, @view, @paging)\", sourceIdentifier, relationshipType, view, paging);\n\t\tconst sourceId = await this.documentView.resolveIdOrSlug(sourceIdentifier, view, void 0, signal);\n\t\tconst targetIds = (await this.documentIndexer.getOutgoing(sourceId, [relationshipType], void 0, void 0, signal)).results.map((rel) => rel.targetId);\n\t\tif (targetIds.length === 0) return {\n\t\t\tresults: [],\n\t\t\toptions: paging || {\n\t\t\t\tcursor: \"0\",\n\t\t\t\tlimit: 0\n\t\t\t}\n\t\t};\n\t\treturn this.reactor.find({ ids: targetIds }, view, paging, void 0, signal);\n\t}",
+  "packageVersion": "6.2.1",
+  "driveId": "00000000-0000-4000-8000-000000000001"
+}

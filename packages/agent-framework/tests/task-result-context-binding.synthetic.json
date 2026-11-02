@@ -1,0 +1,34 @@
+{
+  "ownerId": "owner",
+  "scopeRef": "synthetic-league",
+  "reviewId": "00000000-0000-4000-8000-000000000002",
+  "proposalHash": "sha256:8df277635293fbace15f5d74034dfb34b20a057b3bcfe206bb233aff5b9264f5",
+  "report": {
+    "id": "00000000-0000-4000-8000-000000000001",
+    "contentVersion": 1,
+    "contentHash": "sha256:0c89669f8406f1a3401b6d7a712844154a583511e3b14a179a525ba830a96769"
+  },
+  "task": {
+    "authorityRef": "authority:synthetic",
+    "id": "native-task-existing",
+    "nativeOwnerId": "native-owner",
+    "projectId": "synthetic-project",
+    "sourceRef": "source:task",
+    "commitmentHash": "sha256:293cebebfc7cbff68410ae842b78a9d93748e98936bbbba07a0be90686f64a82"
+  },
+  "producer": {
+    "dispatchId": "producing-dispatch",
+    "offerHash": "sha256:fc900148204fadfe1fd29c88361cc65261aae072a3937cc428cc5cec89e2760b",
+    "instanceId": "original-agent",
+    "definitionId": "synthetic-commissioner",
+    "definitionVersion": "1.0.0",
+    "definitionHash": "sha256:cb28ba6c2f1e05ce66fccee625a73b334abbe15859fd97bf0ae1712bdf10f663",
+    "instructionsHash": "sha256:abea25c120264f3fba39eabda1c3355d6162b39be3b49f99b9c894104930691b"
+  },
+  "context": {
+    "workerKind": "saved-context/v1",
+    "receiptHash": "sha256:9535a24d19ceb6c4642a78d5f14e886e4c7245b201497480370923e29c9bfeb8",
+    "contextHash": "sha256:9ca1a109ef79ddc4f359a59a4c7bfd39d6390ee9d3d0cb7a246cbabd7127bc31",
+    "requestHash": "sha256:8869ad22943e917a9e5aae887407895ca2687608588cb6f5e154e6cc4c617642"
+  }
+}

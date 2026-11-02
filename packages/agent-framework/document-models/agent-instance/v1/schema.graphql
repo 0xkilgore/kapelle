@@ -1,0 +1,223 @@
+scalar Unknown
+scalar DateTime
+scalar Address
+scalar AttachmentRef
+scalar Amount_Tokens
+scalar EthereumAddress
+scalar EmailAddress
+scalar Amount_Percentage
+scalar Date
+scalar URL
+scalar Amount_Money
+scalar OLabel
+scalar Currency
+scalar PHID
+scalar OID
+scalar Amount_Fiat
+scalar Amount_Currency
+scalar Amount_Crypto
+scalar Amount
+scalar Upload
+
+
+type VersionedRef { id: ID! version: String! contentHash: String! }
+
+enum DesiredState { READY PAUSED RETIRED }
+enum SkillSource { BUILTIN MARKET USER }
+enum ConnectionDirection { RECEIVE PREPARE SEND }
+enum ReviewPolicy { ALWAYS WITHIN_GRANT }
+enum DocumentAccess { PRIVATE SHARED PUBLIC }
+enum CatchUpPolicy { SKIP COALESCE }
+type EnabledSkill { ref: VersionedRef! source: SkillSource! }
+type CapabilityGrant { id: ID! principalId: ID! resourceRef: ID! actions: [String!]! expiresAt: DateTime! reviewPolicy: ReviewPolicy! revokedAt: DateTime }
+type ConnectionBinding { id: ID! connectionRef: ID! label: String! accountRef: ID! directions: [ConnectionDirection!]! revokedAt: DateTime }
+type DocumentLink { documentRef: ID! access: DocumentAccess! }
+type ScheduleBinding { id: ID! schedulerRef: ID! timezone: String! maxExecutions: Int! conditionRef: ID! catchUp: CatchUpPolicy! watermarkRef: ID! lastRunRef: ID }
+type ModelPolicy { preferredProfile: String! concurrencyLimit: Int! budgetPolicyRef: ID! paidFallback: Boolean! fallbackProvider: String fallbackScopeRef: ID fallbackBudgetRef: ID }
+
+type AgentInstanceState {
+revision: Int!
+ownerId: ID
+createdAt: DateTime
+updatedAt: DateTime
+
+instanceId: ID
+scopeRef: ID
+definitionRef: VersionedRef
+name: String
+responsibilities: [String!]!
+operatingPolicy: String
+desiredState: DesiredState!
+runtimeBindingRef: ID
+skills: [EnabledSkill!]!
+grants: [CapabilityGrant!]!
+connections: [ConnectionBinding!]!
+documentLinks: [DocumentLink!]!
+schedules: [ScheduleBinding!]!
+modelPolicy: ModelPolicy
+
+}
+
+# control
+
+input CreateInstanceInput {
+ actorId: ID!
+ occurredAt: DateTime!
+ expectedRevision: Int!
+instanceId: ID!
+ scopeRef: ID!
+ definitionRef: VersionedRefInput!
+ name: String!
+ responsibilities: [String!]!
+ operatingPolicy: String!
+ modelPolicy: ModelPolicyInput!
+}
+input VersionedRefInput { id: ID! version: String! contentHash: String! }
+input ModelPolicyInput { preferredProfile: String! concurrencyLimit: Int! budgetPolicyRef: ID! paidFallback: Boolean! fallbackProvider: String fallbackScopeRef: ID fallbackBudgetRef: ID }
+
+input SetResponsibilitiesInput {
+ actorId: ID!
+ occurredAt: DateTime!
+ expectedRevision: Int!
+responsibilities: [String!]!
+}
+
+
+input SetOperatingPolicyInput {
+ actorId: ID!
+ occurredAt: DateTime!
+ expectedRevision: Int!
+operatingPolicy: String!
+}
+
+
+input EnableSkillInput {
+ actorId: ID!
+ occurredAt: DateTime!
+ expectedRevision: Int!
+ref: VersionedRefInput!
+ source: SkillSource!
+}
+
+
+input DisableSkillInput {
+ actorId: ID!
+ occurredAt: DateTime!
+ expectedRevision: Int!
+skillId: ID!
+}
+
+
+input GrantCapabilityInput {
+ actorId: ID!
+ occurredAt: DateTime!
+ expectedRevision: Int!
+grant: CapabilityGrantInput!
+}
+input CapabilityGrantInput { id: ID! principalId: ID! resourceRef: ID! actions: [String!]! expiresAt: DateTime! reviewPolicy: ReviewPolicy! }
+
+input RevokeCapabilityInput {
+ actorId: ID!
+ occurredAt: DateTime!
+ expectedRevision: Int!
+grantId: ID!
+}
+
+
+input BindConnectionInput {
+ actorId: ID!
+ occurredAt: DateTime!
+ expectedRevision: Int!
+binding: ConnectionBindingInput!
+}
+input ConnectionBindingInput { id: ID! connectionRef: ID! label: String! accountRef: ID! directions: [ConnectionDirection!]! }
+
+input RevokeConnectionInput {
+ actorId: ID!
+ occurredAt: DateTime!
+ expectedRevision: Int!
+connectionId: ID!
+}
+
+
+input SetRuntimeBindingInput {
+ actorId: ID!
+ occurredAt: DateTime!
+ expectedRevision: Int!
+runtimeBindingRef: ID!
+}
+
+
+input SetModelPolicyInput {
+ actorId: ID!
+ occurredAt: DateTime!
+ expectedRevision: Int!
+modelPolicy: ModelPolicyInput!
+}
+
+
+input LinkDocumentInput {
+ actorId: ID!
+ occurredAt: DateTime!
+ expectedRevision: Int!
+documentRef: ID!
+ access: DocumentAccess!
+}
+
+
+input UnlinkDocumentInput {
+ actorId: ID!
+ occurredAt: DateTime!
+ expectedRevision: Int!
+documentRef: ID!
+}
+
+
+input BindScheduleInput {
+ actorId: ID!
+ occurredAt: DateTime!
+ expectedRevision: Int!
+schedule: ScheduleBindingInput!
+}
+input ScheduleBindingInput { id: ID! schedulerRef: ID! timezone: String! maxExecutions: Int! conditionRef: ID! catchUp: CatchUpPolicy! watermarkRef: ID! lastRunRef: ID }
+
+input UnbindScheduleInput {
+ actorId: ID!
+ occurredAt: DateTime!
+ expectedRevision: Int!
+scheduleId: ID!
+}
+
+
+input PinDefinitionVersionInput {
+ actorId: ID!
+ occurredAt: DateTime!
+ expectedRevision: Int!
+definitionRef: VersionedRefInput!
+ migrationRef: VersionedRefInput!
+ compatibilityFixtureRef: VersionedRefInput!
+}
+
+
+input RequestPauseInput {
+ actorId: ID!
+ occurredAt: DateTime!
+ expectedRevision: Int!
+
+}
+
+
+input RequestResumeInput {
+ actorId: ID!
+ occurredAt: DateTime!
+ expectedRevision: Int!
+
+}
+
+
+input RetireInstanceInput {
+ actorId: ID!
+ occurredAt: DateTime!
+ expectedRevision: Int!
+
+}

@@ -1,0 +1,43 @@
+# Kapelle hub: identity and routing only (never authorizes). Listens on 127.0.0.1:8700 behind Caddy (HTTPS). Reaches each org
+# runtime only through that org's access socket (SupplementaryGroups: one kapelle-<org> group per hosted org).
+[Unit]
+Description=Kapelle hub
+After=network-online.target kapelle-org@exna.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=kapelle-hub
+Group=kapelle-hub
+SupplementaryGroups=kapelle-exna
+ExecStart=/opt/node/bin/node /opt/kapelle/current/bin/hub-serve.mjs /etc/kapelle/hub-config.json
+Restart=on-failure
+RestartSec=2
+MemoryMax=256M
+StateDirectory=kapelle-hub
+StateDirectoryMode=0700
+UMask=0077
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictSUIDSGID=yes
+LockPersonality=yes
+RestrictNamespaces=yes
+CapabilityBoundingSet=
+SystemCallFilter=@system-service
+SystemCallArchitectures=native
+ProtectHostname=yes
+ProtectClock=yes
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+# No IPAddressDeny=any: since B2 the hub needs HTTPS egress to the mail provider (sign-in/invite links); it still listens on loopback only.
+ReadOnlyPaths=/etc/kapelle
+ReadWritePaths=/var/lib/kapelle-hub
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target

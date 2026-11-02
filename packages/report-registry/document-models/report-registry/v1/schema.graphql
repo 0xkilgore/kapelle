@@ -1,0 +1,139 @@
+scalar Unknown
+scalar DateTime
+scalar Address
+scalar AttachmentRef
+scalar Amount_Tokens
+scalar EthereumAddress
+scalar EmailAddress
+scalar Amount_Percentage
+scalar Date
+scalar URL
+scalar Amount_Money
+scalar OLabel
+scalar Currency
+scalar PHID
+scalar OID
+scalar Amount_Fiat
+scalar Amount_Currency
+scalar Amount_Crypto
+scalar Amount
+scalar Upload
+
+enum ReportLifecycle { DRAFT FINAL SUPERSEDED WITHDRAWN }
+enum ReportAttentionRequest { NONE READ ANSWER DECIDE APPROVE REQUEST_CHANGE }
+enum ReportProducerKind { HUMAN AGENT SERVICE IMPORT }
+enum ReportContentStorage { INLINE_MARKDOWN BLOB }
+enum ReportAttentionResolution { READ DISMISSED RESOLVED }
+enum ReportFeedbackRouteStatus { UNROUTED ROUTED FAILED }
+
+type ReportProducer {
+  kind: ReportProducerKind!
+  id: String!
+  label: String
+}
+
+type ReportContentDescriptor {
+  storage: ReportContentStorage!
+  mimeType: String!
+  filename: String
+  contentHash: String!
+  byteSize: Int!
+  markdown: String
+  blobRef: String
+}
+
+type ReportAttentionState {
+  request: ReportAttentionRequest!
+  reasonCode: String
+  reason: String
+  reviewBy: DateTime
+  expiresAt: DateTime
+  requestedBy: String
+  requestedAt: DateTime
+  resolvedAt: DateTime
+  resolution: ReportAttentionResolution
+}
+
+type ReportFeedbackRoute {
+  status: ReportFeedbackRouteStatus!
+  destination: String
+  routedAt: DateTime
+  error: String
+}
+
+type ReportFeedback {
+  id: ID!
+  actorId: String!
+  bodyMarkdown: String!
+  createdAt: DateTime!
+  route: ReportFeedbackRoute!
+}
+
+type ReportReviewState {
+  openedAt: DateTime
+  readAt: DateTime
+  feedback: [ReportFeedback!]!
+}
+
+type ReportRegistryState {
+  id: PHID
+  schemaVersion: Int!
+  reportRef: String!
+  revision: Int!
+  title: String!
+  projectRef: String
+  familyRef: String
+  sourceRef: String
+  producer: ReportProducer
+  publication: ReportPublication
+  content: ReportContentDescriptor
+  lifecycle: ReportLifecycle!
+  attention: ReportAttentionState!
+  review: ReportReviewState!
+  supersedesRef: String
+  supersededByRef: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  createdBy: String!
+  updatedBy: String!
+}
+
+type ReportAgentSnapshot { id: String! label: String! instanceId: PHID definitionId: PHID definitionVersion: String definitionHash: String }
+type ReportPublication { publicationId: String! author: ReportAgentSnapshot! publisher: ReportAgentSnapshot! runRef: String! sourceRef: String! provenanceRef: String! contentHash: String! contentVersion: Int! authorizationRef: String! publishedAt: DateTime! }
+
+
+# content
+
+input ReportAgentSnapshotInput { id: String! label: String! instanceId: PHID definitionId: PHID definitionVersion: String definitionHash: String }
+input ReportPublicationInput { publicationId: String! author: ReportAgentSnapshotInput! publisher: ReportAgentSnapshotInput! runRef: String! sourceRef: String! provenanceRef: String! contentHash: String! contentVersion: Int! authorizationRef: String! publishedAt: DateTime! }
+input ReportProducerInput { kind: ReportProducerKind! id: String! label: String }
+input ReportContentDescriptorInput { storage: ReportContentStorage! mimeType: String! filename: String contentHash: String! byteSize: Int! markdown: String blobRef: String }
+input RegisterReportInput { id: PHID! reportRef: String! title: String! projectRef: String familyRef: String sourceRef: String producer: ReportProducerInput! content: ReportContentDescriptorInput! publication: ReportPublicationInput lifecycle: ReportLifecycle occurredAt: DateTime! actorId: String! }
+
+input PublishReportInput { expectedRevision: Int! occurredAt: DateTime! actorId: String! }
+
+# attention
+
+input RequestReviewInput { request: ReportAttentionRequest! reasonCode: String reason: String reviewBy: DateTime expiresAt: DateTime expectedRevision: Int! occurredAt: DateTime! actorId: String! }
+
+input MarkOpenedInput { expectedRevision: Int! occurredAt: DateTime! actorId: String! }
+
+input MarkReadInput { expectedRevision: Int! occurredAt: DateTime! actorId: String! }
+
+input MarkUnreadInput { expectedRevision: Int! occurredAt: DateTime! actorId: String! }
+
+input AddFeedbackInput { feedbackId: ID! bodyMarkdown: String! expectedRevision: Int! occurredAt: DateTime! actorId: String! }
+
+input MarkFeedbackRoutedInput { feedbackId: ID! destination: String! expectedRevision: Int! occurredAt: DateTime! actorId: String! }
+
+input MarkFeedbackRouteFailedInput { feedbackId: ID! error: String! expectedRevision: Int! occurredAt: DateTime! actorId: String! }
+
+input DismissAttentionInput { expectedRevision: Int! occurredAt: DateTime! actorId: String! }
+
+input ResolveAttentionInput { expectedRevision: Int! occurredAt: DateTime! actorId: String! }
+
+# lifecycle
+
+input SupersedeReportInput { supersededByRef: String! expectedRevision: Int! occurredAt: DateTime! actorId: String! }
+
+input WithdrawReportInput { reason: String expectedRevision: Int! occurredAt: DateTime! actorId: String! }

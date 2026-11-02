@@ -1,0 +1,28 @@
+{
+  "name": "@kapelle/task-authority",
+  "version": "0.1.0",
+  "license": "AGPL-3.0-only",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc --noEmit",
+    "gateway:build": "tsc -p tsconfig.gateway.json",
+    "synthetic:build": "tsc -p tsconfig.synthetic-drill.json",
+    "gateway:start": "node dist/src/gateway/server.js",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
+  },
+  "dependencies": {
+    "@powerhousedao/reactor-browser": "6.2.1",
+    "document-model": "6.2.1",
+    "react": "19.2.6",
+    "zod": "4.3.6"
+  },
+  "devDependencies": {
+    "@types/node": "^24.9.2",
+    "@vitest/coverage-v8": "4.1.1",
+    "typescript": "^5.9.3",
+    "vite-tsconfig-paths": "6.1.1",
+    "vitest": "4.1.1"
+  }
+}

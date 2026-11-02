@@ -1,0 +1,12 @@
+{
+  "name": "@kapelle/image-decoder",
+  "license": "AGPL-3.0-only",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "IMAGES-V1 I1: the ONLY package with native code (sharp/libvips). Runs as a separate, bounded process; the org runtime bundle never imports it.",
+  "dependencies": {
+    "sharp": "0.35.5"
+  },
+  "engines": { "node": ">=24.0.0" }
+}

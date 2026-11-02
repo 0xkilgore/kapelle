@@ -1,0 +1,99 @@
+{
+  "capturedAt": "2026-08-22T20:54:33.000Z",
+  "source": "ephemeral loopback Vetra 6.2.1 MCP runtime through the production reviewer proxy",
+  "sourceCommit": "e0184f7-with-review-fixes",
+  "documentModel": "kilgore/report",
+  "syntheticOnly": true,
+  "reviewerActorId": "human:chris",
+  "operations": [
+    {
+      "type": "MARK_OPENED",
+      "scope": "global",
+      "input": {
+        "expectedRevision": 2,
+        "occurredAt": "2026-08-22T20:20:02.000Z",
+        "actorId": "human:chris"
+      },
+      "upstreamResult": { "success": true }
+    },
+    {
+      "type": "MARK_READ",
+      "scope": "global",
+      "input": {
+        "expectedRevision": 3,
+        "occurredAt": "2026-08-22T20:20:03.000Z",
+        "actorId": "human:chris"
+      },
+      "upstreamResult": { "success": true }
+    },
+    {
+      "type": "ADD_FEEDBACK",
+      "scope": "global",
+      "input": {
+        "expectedRevision": 4,
+        "occurredAt": "2026-08-22T20:20:04.000Z",
+        "actorId": "human:chris",
+        "feedbackId": "6f0a0f4b-f6cc-4d73-8e65-46f1ac8ad735",
+        "bodyMarkdown": "Please clarify the synthetic conclusion."
+      },
+      "upstreamResult": { "success": true }
+    },
+    {
+      "type": "DISMISS_ATTENTION",
+      "scope": "global",
+      "input": {
+        "expectedRevision": 2,
+        "occurredAt": "2026-08-22T20:20:02.000Z",
+        "actorId": "human:chris"
+      },
+      "upstreamResult": { "success": true }
+    },
+    {
+      "type": "RESOLVE_ATTENTION",
+      "scope": "global",
+      "input": {
+        "expectedRevision": 5,
+        "occurredAt": "2026-08-22T20:20:05.000Z",
+        "actorId": "human:chris"
+      },
+      "upstreamResult": { "success": true }
+    }
+  ],
+  "finalResults": {
+    "dismissed": {
+      "revision": 3,
+      "attention": {
+        "request": "DECIDE",
+        "resolution": "DISMISSED",
+        "resolvedAt": "2026-08-22T20:20:02.000Z"
+      }
+    },
+    "resolved": {
+      "revision": 6,
+      "review": {
+        "openedAt": "2026-08-22T20:20:02.000Z",
+        "readAt": "2026-08-22T20:20:03.000Z",
+        "feedback": [
+          {
+            "id": "6f0a0f4b-f6cc-4d73-8e65-46f1ac8ad735",
+            "actorId": "human:chris",
+            "bodyMarkdown": "Please clarify the synthetic conclusion.",
+            "createdAt": "2026-08-22T20:20:04.000Z",
+            "route": {
+              "status": "UNROUTED",
+              "destination": null,
+              "routedAt": null,
+              "error": null
+            }
+          }
+        ]
+      },
+      "attention": {
+        "request": "DECIDE",
+        "resolution": "RESOLVED",
+        "resolvedAt": "2026-08-22T20:20:05.000Z"
+      }
+    }
+  },
+  "note": "Synthetic documents only. Tokens, random document IDs, Drive IDs, filesystem paths, and private content are omitted."
+}

@@ -1,0 +1,17 @@
+{
+  "object": "email",
+  "id": "56761188-7520-42d8-8898-ff6fc54ce618",
+  "to": ["__INTAKE_ADDRESS__"],
+  "from": "alex@exna.test",
+  "created_at": "2026-10-15T14:29:39.000Z",
+  "subject": "October meeting notes",
+  "html": "<p>Confirmed: neighborhood cleanup on <b>Saturday Oct 31</b>.</p><script>alert(1)</script>",
+  "html_format": "data_uri",
+  "text": "Confirmed: neighborhood cleanup on Saturday Oct 31.\nFlyer says 10am; notes say 9am.",
+  "headers": { "from": "Alex <alex@exna.test>", "return-path": "alex@exna.test", "mime-version": "1.0" },
+  "bcc": [], "cc": [], "reply_to": [], "received_for": [],
+  "authentication": { "spf": "pass", "dkim": "pass", "dmarc": "pass" },
+  "message_id": "<example+123>",
+  "raw": { "download_url": "https://inbound-cdn.resend.com/raw/example?signature=sig", "expires_at": "2026-10-15T15:29:39.000Z" },
+  "attachments": []
+}

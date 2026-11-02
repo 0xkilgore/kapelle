@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "rootDir": ".",
+    "paths": {
+      "document-models/*": ["./generated/*/index.ts"]
+    },
+    "module": "nodenext",
+    "moduleDetection": "force",
+    "target": "esnext",
+    "types": ["node", "vitest/globals"],
+    "lib": ["ESNext", "dom", "dom.iterable"],
+    "strict": true,
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "noUncheckedSideEffectImports": true,
+    "skipLibCheck": true,
+    "noEmit": true
+  },
+  "include": ["generated/**/*.ts", "src/**/*.ts", "tests/**/*.ts"],
+  "exclude": ["node_modules"]
+}

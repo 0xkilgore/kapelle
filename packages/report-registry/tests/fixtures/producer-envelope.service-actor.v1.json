@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "report-registry-producer-envelope.v1",
+  "actorId": "service:report-publisher",
+  "calls": [
+    {
+      "name": "createDocument",
+      "args": {
+        "documentType": "kilgore/report",
+        "name": "report-promotion-intent:d3eca97ac2d30fe3e32c",
+        "driveId": "drive:report-registry"
+      }
+    },
+    {
+      "name": "addActions",
+      "args": {
+        "documentId": "document-1",
+        "actions": [
+          {
+            "type": "REGISTER_REPORT",
+            "scope": "global",
+            "input": {
+              "id": "report:0xd3eca97ac2d30fe3e32cddc362ce42b0",
+              "reportRef": "report:test:service-actor-envelope",
+              "title": "Operator report",
+              "projectRef": "daily-driver",
+              "familyRef": "daily-driver-status",
+              "sourceRef": "agent://research-agent/operator-report",
+              "producer": {
+                "kind": "AGENT",
+                "id": "research-agent",
+                "label": "Research Agent"
+              },
+              "content": {
+                "storage": "INLINE_MARKDOWN",
+                "mimeType": "text/markdown",
+                "filename": "report.md",
+                "contentHash": "634fcae89e9f04f220e5010cbfacdcb033b279d9f96b5c6861650921c92e0e80",
+                "byteSize": 44,
+                "markdown": "# Operator report\n\nChoose the bounded path.\n",
+                "blobRef": null
+              },
+              "lifecycle": "FINAL",
+              "occurredAt": "2026-08-23T15:00:00.000Z",
+              "actorId": "service:report-publisher"
+            }
+          },
+          {
+            "type": "REQUEST_REVIEW",
+            "scope": "global",
+            "input": {
+              "request": "DECIDE",
+              "reasonCode": "operator_decision",
+              "reason": "Choose the bounded path.",
+              "reviewBy": "2026-08-24T17:00:00.000Z",
+              "expiresAt": null,
+              "expectedRevision": 1,
+              "occurredAt": "2026-08-23T15:00:00.000Z",
+              "actorId": "service:report-publisher"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

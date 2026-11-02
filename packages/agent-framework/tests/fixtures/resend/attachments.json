@@ -1,0 +1,10 @@
+{
+  "object": "list",
+  "has_more": false,
+  "data": [
+    { "id": "2a0c9ce0-3112-4728-976e-47ddcd16a318", "filename": "agenda.md", "size": 24, "content_type": "text/markdown", "content_disposition": "attachment", "content_id": null,
+      "download_url": "https://inbound-cdn.resend.com/a/2a0c9ce0?signature=sig-1", "expires_at": "2026-10-17T14:29:41.521Z" },
+    { "id": "9b1fa2c3-0000-4000-8000-000000000002", "filename": "flyer.pdf", "size": 13264, "content_type": "application/pdf", "content_disposition": "attachment", "content_id": null,
+      "download_url": "https://inbound-cdn.resend.com/a/9b1fa2c3?signature=sig-2", "expires_at": "2026-10-17T14:29:41.521Z" }
+  ]
+}

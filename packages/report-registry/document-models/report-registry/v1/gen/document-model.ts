@@ -1,0 +1,222 @@
+import type { DocumentModelGlobalState } from "document-model";
+
+export const documentModel: DocumentModelGlobalState = {
+  id: "kilgore/report",
+  name: "Report Registry",
+  author: {
+    name: "Chris Powers",
+    website: "https://kapelle.ai",
+  },
+  extension: "phreport",
+  description:
+    "Durable, source-neutral report documents with immutable content receipts, explicit review attention, feedback routing receipts, and supersession.",
+  specifications: [
+    {
+      state: {
+        local: {
+          schema: "",
+          examples: [],
+          initialValue: "",
+        },
+        global: {
+          schema:
+            "enum ReportLifecycle { DRAFT FINAL SUPERSEDED WITHDRAWN }\nenum ReportAttentionRequest { NONE READ ANSWER DECIDE APPROVE REQUEST_CHANGE }\nenum ReportProducerKind { HUMAN AGENT SERVICE IMPORT }\nenum ReportContentStorage { INLINE_MARKDOWN BLOB }\nenum ReportAttentionResolution { READ DISMISSED RESOLVED }\nenum ReportFeedbackRouteStatus { UNROUTED ROUTED FAILED }\n\ntype ReportProducer {\n  kind: ReportProducerKind!\n  id: String!\n  label: String\n}\n\ntype ReportContentDescriptor {\n  storage: ReportContentStorage!\n  mimeType: String!\n  filename: String\n  contentHash: String!\n  byteSize: Int!\n  markdown: String\n  blobRef: String\n}\n\ntype ReportAttentionState {\n  request: ReportAttentionRequest!\n  reasonCode: String\n  reason: String\n  reviewBy: DateTime\n  expiresAt: DateTime\n  requestedBy: String\n  requestedAt: DateTime\n  resolvedAt: DateTime\n  resolution: ReportAttentionResolution\n}\n\ntype ReportFeedbackRoute {\n  status: ReportFeedbackRouteStatus!\n  destination: String\n  routedAt: DateTime\n  error: String\n}\n\ntype ReportFeedback {\n  id: ID!\n  actorId: String!\n  bodyMarkdown: String!\n  createdAt: DateTime!\n  route: ReportFeedbackRoute!\n}\n\ntype ReportReviewState {\n  openedAt: DateTime\n  readAt: DateTime\n  feedback: [ReportFeedback!]!\n}\n\ntype ReportRegistryState {\n  id: PHID\n  schemaVersion: Int!\n  reportRef: String!\n  revision: Int!\n  title: String!\n  projectRef: String\n  familyRef: String\n  sourceRef: String\n  producer: ReportProducer\n  publication: ReportPublication\n  content: ReportContentDescriptor\n  lifecycle: ReportLifecycle!\n  attention: ReportAttentionState!\n  review: ReportReviewState!\n  supersedesRef: String\n  supersededByRef: String\n  createdAt: DateTime\n  updatedAt: DateTime\n  createdBy: String!\n  updatedBy: String!\n}\n\ntype ReportAgentSnapshot { id: String! label: String! instanceId: PHID definitionId: PHID definitionVersion: String definitionHash: String }\ntype ReportPublication { publicationId: String! author: ReportAgentSnapshot! publisher: ReportAgentSnapshot! runRef: String! sourceRef: String! provenanceRef: String! contentHash: String! contentVersion: Int! authorizationRef: String! publishedAt: DateTime! }\n",
+          examples: [],
+          initialValue:
+            '{"id":null,"schemaVersion":1,"reportRef":"","revision":0,"title":"","projectRef":null,"familyRef":null,"sourceRef":null,"producer":null,"content":null,"lifecycle":"DRAFT","attention":{"request":"NONE","reasonCode":null,"reason":null,"reviewBy":null,"expiresAt":null,"requestedBy":null,"requestedAt":null,"resolvedAt":null,"resolution":null},"review":{"openedAt":null,"readAt":null,"feedback":[]},"supersedesRef":null,"supersededByRef":null,"createdAt":null,"updatedAt":null,"createdBy":"","updatedBy":""}',
+        },
+      },
+      modules: [
+        {
+          id: "report-content-v1",
+          name: "content",
+          description:
+            "Stable registration identity, immutable content receipts, provenance, and publication.",
+          operations: [
+            {
+              id: "register-report-v1",
+              name: "REGISTER_REPORT",
+              description:
+                "Register one report idempotently with producer provenance and an immutable content receipt.",
+              schema:
+                "input ReportAgentSnapshotInput { id: String! label: String! instanceId: PHID definitionId: PHID definitionVersion: String definitionHash: String }\ninput ReportPublicationInput { publicationId: String! author: ReportAgentSnapshotInput! publisher: ReportAgentSnapshotInput! runRef: String! sourceRef: String! provenanceRef: String! contentHash: String! contentVersion: Int! authorizationRef: String! publishedAt: DateTime! }\ninput ReportProducerInput { kind: ReportProducerKind! id: String! label: String }\ninput ReportContentDescriptorInput { storage: ReportContentStorage! mimeType: String! filename: String contentHash: String! byteSize: Int! markdown: String blobRef: String }\ninput RegisterReportInput { id: PHID! reportRef: String! title: String! projectRef: String familyRef: String sourceRef: String producer: ReportProducerInput! content: ReportContentDescriptorInput! publication: ReportPublicationInput lifecycle: ReportLifecycle occurredAt: DateTime! actorId: String! }",
+              template:
+                "Register a source-neutral report and freeze its initial content descriptor.",
+              reducer: "",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "publish-report-v1",
+              name: "PUBLISH_REPORT",
+              description: "Move a draft report to final.",
+              schema:
+                "input PublishReportInput { expectedRevision: Int! occurredAt: DateTime! actorId: String! }",
+              template: "Publish a draft report.",
+              reducer: "",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+          ],
+        },
+        {
+          id: "report-attention-v1",
+          name: "attention",
+          description:
+            "Explicit operator attention, review receipts, and feedback routing truth.",
+          operations: [
+            {
+              id: "request-review-v1",
+              name: "REQUEST_REVIEW",
+              description:
+                "Request one explicit operator review action for a final report.",
+              schema:
+                "input RequestReviewInput { request: ReportAttentionRequest! reasonCode: String reason: String reviewBy: DateTime expiresAt: DateTime expectedRevision: Int! occurredAt: DateTime! actorId: String! }",
+              template: "Request bounded operator attention.",
+              reducer: "",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "mark-opened-v1",
+              name: "MARK_OPENED",
+              description: "Record the first open receipt.",
+              schema:
+                "input MarkOpenedInput { expectedRevision: Int! occurredAt: DateTime! actorId: String! }",
+              template: "Record an open receipt.",
+              reducer: "",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "mark-read-v1",
+              name: "MARK_READ",
+              description: "Record a read receipt and resolve READ attention.",
+              schema:
+                "input MarkReadInput { expectedRevision: Int! occurredAt: DateTime! actorId: String! }",
+              template: "Record a read receipt.",
+              reducer: "",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "mark-unread-v1",
+              name: "MARK_UNREAD",
+              description:
+                "Mark a final report unread without undoing other decisions.",
+              schema:
+                "input MarkUnreadInput { expectedRevision: Int! occurredAt: DateTime! actorId: String! }",
+              template: "Mark a report unread.",
+              reducer: "",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "add-feedback-v1",
+              name: "ADD_FEEDBACK",
+              description: "Attach operator feedback with an unrouted receipt.",
+              schema:
+                "input AddFeedbackInput { feedbackId: ID! bodyMarkdown: String! expectedRevision: Int! occurredAt: DateTime! actorId: String! }",
+              template: "Attach operator feedback without implying delivery.",
+              reducer: "",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "mark-feedback-routed-v1",
+              name: "MARK_FEEDBACK_ROUTED",
+              description:
+                "Record successful delivery of feedback to a destination.",
+              schema:
+                "input MarkFeedbackRoutedInput { feedbackId: ID! destination: String! expectedRevision: Int! occurredAt: DateTime! actorId: String! }",
+              template: "Record a successful routing receipt.",
+              reducer: "",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "mark-feedback-route-failed-v1",
+              name: "MARK_FEEDBACK_ROUTE_FAILED",
+              description:
+                "Record a failed feedback delivery without claiming success.",
+              schema:
+                "input MarkFeedbackRouteFailedInput { feedbackId: ID! error: String! expectedRevision: Int! occurredAt: DateTime! actorId: String! }",
+              template: "Record a failed routing receipt.",
+              reducer: "",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "dismiss-attention-v1",
+              name: "DISMISS_ATTENTION",
+              description: "Dismiss an active attention request.",
+              schema:
+                "input DismissAttentionInput { expectedRevision: Int! occurredAt: DateTime! actorId: String! }",
+              template: "Dismiss an active attention request.",
+              reducer: "",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "resolve-attention-v1",
+              name: "RESOLVE_ATTENTION",
+              description:
+                "Resolve an active answer, decide, approve, or request-change review.",
+              schema:
+                "input ResolveAttentionInput { expectedRevision: Int! occurredAt: DateTime! actorId: String! }",
+              template: "Resolve an active attention request.",
+              reducer: "",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+          ],
+        },
+        {
+          id: "report-lifecycle-v1",
+          name: "lifecycle",
+          description: "Non-destructive supersession and withdrawal lifecycle.",
+          operations: [
+            {
+              id: "supersede-report-v1",
+              name: "SUPERSEDE_REPORT",
+              description:
+                "Mark a final report superseded by another registered report reference.",
+              schema:
+                "input SupersedeReportInput { supersededByRef: String! expectedRevision: Int! occurredAt: DateTime! actorId: String! }",
+              template: "Supersede a report without deleting history.",
+              reducer: "",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "withdraw-report-v1",
+              name: "WITHDRAW_REPORT",
+              description: "Withdraw a report without deleting history.",
+              schema:
+                "input WithdrawReportInput { reason: String expectedRevision: Int! occurredAt: DateTime! actorId: String! }",
+              template: "Withdraw a report without deleting history.",
+              reducer: "",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+          ],
+        },
+      ],
+      version: 1,
+      changeLog: [],
+    },
+  ],
+};

@@ -1,0 +1,47 @@
+# Kapelle org runtime for ONE org (%i = org id, e.g. exna). Its own system user; the hub reaches it only through the access
+# socket (group kapelle-%i); the Ops socket is owner-only. Paths match deploy/kapelle-admin.ts layout().
+[Unit]
+Description=Kapelle org runtime (%i)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=kapelle-%i
+Group=kapelle-%i
+ExecStart=/opt/node/bin/node /opt/kapelle/current/bin/org-serve.mjs /etc/kapelle/orgs/%i.json
+Restart=on-failure
+RestartSec=2
+# G-1: about 200 MiB peak per org on 2 GB. A hard ceiling keeps one org from starving the hub.
+MemoryMax=512M
+# The access socket directory: group-traversable for the hub only (org-runtime checks 0710 with groupAccess).
+RuntimeDirectory=kapelle-access/%i
+RuntimeDirectoryMode=0710
+RuntimeDirectoryPreserve=no
+StateDirectory=kapelle/%i
+StateDirectoryMode=0700
+UMask=0077
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictSUIDSGID=yes
+LockPersonality=yes
+RestrictNamespaces=yes
+CapabilityBoundingSet=
+SystemCallFilter=@system-service
+SystemCallArchitectures=native
+ProtectHostname=yes
+ProtectClock=yes
+# Outbound HTTPS (model provider, mail provider) + the Unix sockets.
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+ReadOnlyPaths=/etc/kapelle
+ReadWritePaths=/var/lib/kapelle/%i /var/backups/kapelle/%i
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target

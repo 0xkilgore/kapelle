@@ -1,0 +1,16 @@
+{
+  "name": "@kapelle/report-registry",
+  "description": "Durable, source-neutral report documents with review state, feedback routing, supersession, and bounded consumer projections.",
+  "publisher": {},
+  "documentModels": [
+    {
+      "id": "kilgore/report",
+      "name": "Report Registry"
+    }
+  ],
+  "apps": [],
+  "editors": [],
+  "processors": [],
+  "subgraphs": [],
+  "config": []
+}

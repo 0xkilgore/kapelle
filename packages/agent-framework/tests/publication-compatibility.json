@@ -1,0 +1,829 @@
+{
+  "base": "265dd408d0b63fcfe775c1521f664ab6a756c2e6",
+  "cases": [
+    {
+      "artifact": {
+        "contentHash": "sha256:481a8d3e73f96dcd86c7dbd866aa8a0421fc81208523299424998962735654a3",
+        "id": "publication:481a8d3e73f96dcd86c7dbd866aa8a0421fc81208523299424998962735654a3",
+        "manifest": {
+          "build": {
+            "environment": "production",
+            "outputHash": "sha256:1efc8cf95c5147a1f63e4a3b2df87eb003d726da3c8fd2f1a8e866225ada9cc5",
+            "receiptHash": "sha256:ff13e0d3c523d846b0790f90abe1f4077f36a8b2728a08156654739687a25f52",
+            "receiptRef": "build:synthetic",
+            "recipeRef": "build:next-production-v1",
+            "siteFiles": [
+              {
+                "bytes": 20,
+                "hash": "sha256:97d6c774af35c81952ddb9308570a7e3622dbd4ac3c35ab821da3ee25768d4bb",
+                "path": "events/cleanup"
+              }
+            ]
+          },
+          "contract": "kapelle/website-publication/v1",
+          "expiresAt": "2026-09-11T12:00:00.000Z",
+          "generation": 1,
+          "ownerId": "owner",
+          "report": {
+            "bytes": 26,
+            "contentHash": "sha256:0c89669f8406f1a3401b6d7a712844154a583511e3b14a179a525ba830a96769",
+            "id": "report-1",
+            "reportRef": "report:synthetic",
+            "sourceRef": "source:synthetic"
+          },
+          "scopeRef": "synthetic-league",
+          "source": {
+            "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "files": [
+              {
+                "bytes": 6,
+                "hash": "sha256:41cf6794ba4200b839c53531555f0f3998df4cbb01a4d5cb0b94e3ca5e23947d",
+                "path": "src/page.tsx"
+              }
+            ],
+            "lockfile": {
+              "bytes": 4,
+              "hash": "sha256:0c030586945fe504b604ecc2e875c38ede400cd5cd73da9730302162e6b02c6f",
+              "path": "package-lock.json"
+            },
+            "repoRef": "repo:synthetic",
+            "tree": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "target": {
+            "aliases": [
+              {
+                "aliasId": "alias_synthetic",
+                "deploymentId": "dpl_old",
+                "domain": "www.synthetic.test"
+              }
+            ],
+            "bindingRef": "website:synthetic",
+            "domains": [
+              "www.synthetic.test"
+            ],
+            "policyVersion": 1,
+            "projectId": "prj_synthetic",
+            "teamId": "team_synthetic"
+          },
+          "task": {
+            "authorityRef": "authority:synthetic",
+            "authorityTaskRef": "native-task-existing",
+            "commitmentHash": "sha256:293cebebfc7cbff68410ae842b78a9d93748e98936bbbba07a0be90686f64a82",
+            "managerTaskRef": "task-existing"
+          }
+        },
+        "version": 1
+      },
+      "manifest": {
+        "build": {
+          "environment": "production",
+          "outputHash": "sha256:1efc8cf95c5147a1f63e4a3b2df87eb003d726da3c8fd2f1a8e866225ada9cc5",
+          "receiptHash": "sha256:ff13e0d3c523d846b0790f90abe1f4077f36a8b2728a08156654739687a25f52",
+          "receiptRef": "build:synthetic",
+          "recipeRef": "build:next-production-v1",
+          "siteFiles": [
+            {
+              "bytes": 20,
+              "hash": "sha256:97d6c774af35c81952ddb9308570a7e3622dbd4ac3c35ab821da3ee25768d4bb",
+              "path": "events/cleanup"
+            }
+          ]
+        },
+        "contract": "kapelle/website-publication/v1",
+        "expiresAt": "2026-09-11T12:00:00.000Z",
+        "generation": 1,
+        "ownerId": "owner",
+        "report": {
+          "bytes": 26,
+          "contentHash": "sha256:0c89669f8406f1a3401b6d7a712844154a583511e3b14a179a525ba830a96769",
+          "id": "report-1",
+          "reportRef": "report:synthetic",
+          "sourceRef": "source:synthetic"
+        },
+        "scopeRef": "synthetic-league",
+        "source": {
+          "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "files": [
+            {
+              "bytes": 6,
+              "hash": "sha256:41cf6794ba4200b839c53531555f0f3998df4cbb01a4d5cb0b94e3ca5e23947d",
+              "path": "src/page.tsx"
+            }
+          ],
+          "lockfile": {
+            "bytes": 4,
+            "hash": "sha256:0c030586945fe504b604ecc2e875c38ede400cd5cd73da9730302162e6b02c6f",
+            "path": "package-lock.json"
+          },
+          "repoRef": "repo:synthetic",
+          "tree": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        },
+        "target": {
+          "aliases": [
+            {
+              "aliasId": "alias_synthetic",
+              "deploymentId": "dpl_old",
+              "domain": "www.synthetic.test"
+            }
+          ],
+          "bindingRef": "website:synthetic",
+          "domains": [
+            "www.synthetic.test"
+          ],
+          "policyVersion": 1,
+          "projectId": "prj_synthetic",
+          "teamId": "team_synthetic"
+        },
+        "task": {
+          "authorityRef": "authority:synthetic",
+          "authorityTaskRef": "native-task-existing",
+          "commitmentHash": "sha256:293cebebfc7cbff68410ae842b78a9d93748e98936bbbba07a0be90686f64a82",
+          "managerTaskRef": "task-existing"
+        }
+      },
+      "name": "v1-unstaged",
+      "proposal": {
+        "action": "publish",
+        "artifactHash": "sha256:481a8d3e73f96dcd86c7dbd866aa8a0421fc81208523299424998962735654a3",
+        "contentHash": "sha256:80c72b1a75bd066f406add57a9120c235d53e40db3ca594137648ce940bf2b1e",
+        "contentRef": "publication:481a8d3e73f96dcd86c7dbd866aa8a0421fc81208523299424998962735654a3",
+        "contentVersion": 1,
+        "effectKind": "WEBSITE_PUBLICATION",
+        "expiresAt": "2026-09-11T12:00:00.000Z",
+        "recipients": [],
+        "senderConnectionRef": null,
+        "targets": [
+          {
+            "contentHash": "sha256:d2ec8a1c21c449245f71aaef479a587d9a72269f1ccb4cd393246e0686489395",
+            "documentRef": "website:synthetic",
+            "revision": 1
+          }
+        ],
+        "version": 1
+      }
+    },
+    {
+      "artifact": {
+        "contentHash": "sha256:86cb2a3fa5d19235b6356ca19396f52147c3e934e72470a93c3d88862c26577e",
+        "id": "publication:86cb2a3fa5d19235b6356ca19396f52147c3e934e72470a93c3d88862c26577e",
+        "manifest": {
+          "build": {
+            "environment": "production",
+            "outputHash": "sha256:7746d5b6a617c7429c0f8dc64c0a6ebaeee1a8d044b307f4744c40232346bac8",
+            "receiptHash": "sha256:e34b28ff8e1ac81801402c9c5086260b4a19b11a132c56bf6bdaee99bfe815a7",
+            "receiptRef": "build:synthetic",
+            "recipeRef": "build:next-production-v1",
+            "siteFiles": [
+              {
+                "bytes": 20,
+                "hash": "sha256:97d6c774af35c81952ddb9308570a7e3622dbd4ac3c35ab821da3ee25768d4bb",
+                "path": "events/cleanup"
+              }
+            ],
+            "stagedDeploymentId": "dpl_new",
+            "staging": {
+              "receiptHash": "sha256:9844ff36b51180d1d978c2bca0b9e3d9d72799e9eeb7264abf7ad2c3e96bb7f8",
+              "receiptRef": "staging:synthetic"
+            }
+          },
+          "contract": "kapelle/website-publication/v1",
+          "expiresAt": "2026-09-11T12:00:00.000Z",
+          "generation": 1,
+          "ownerId": "owner",
+          "report": {
+            "bytes": 26,
+            "contentHash": "sha256:0c89669f8406f1a3401b6d7a712844154a583511e3b14a179a525ba830a96769",
+            "id": "report-1",
+            "reportRef": "report:synthetic",
+            "sourceRef": "source:synthetic"
+          },
+          "scopeRef": "synthetic-league",
+          "source": {
+            "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "files": [
+              {
+                "bytes": 6,
+                "hash": "sha256:41cf6794ba4200b839c53531555f0f3998df4cbb01a4d5cb0b94e3ca5e23947d",
+                "path": "src/page.tsx"
+              }
+            ],
+            "lockfile": {
+              "bytes": 4,
+              "hash": "sha256:0c030586945fe504b604ecc2e875c38ede400cd5cd73da9730302162e6b02c6f",
+              "path": "package-lock.json"
+            },
+            "repoRef": "repo:synthetic",
+            "tree": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "target": {
+            "aliases": [
+              {
+                "aliasId": "alias_synthetic",
+                "deploymentId": "dpl_old",
+                "domain": "www.synthetic.test"
+              }
+            ],
+            "bindingRef": "website:synthetic",
+            "domains": [
+              "www.synthetic.test"
+            ],
+            "policyVersion": 1,
+            "projectId": "prj_synthetic",
+            "teamId": "team_synthetic"
+          },
+          "task": {
+            "authorityRef": "authority:synthetic",
+            "authorityTaskRef": "native-task-existing",
+            "commitmentHash": "sha256:293cebebfc7cbff68410ae842b78a9d93748e98936bbbba07a0be90686f64a82",
+            "managerTaskRef": "task-existing"
+          }
+        },
+        "version": 1
+      },
+      "manifest": {
+        "build": {
+          "environment": "production",
+          "outputHash": "sha256:7746d5b6a617c7429c0f8dc64c0a6ebaeee1a8d044b307f4744c40232346bac8",
+          "receiptHash": "sha256:e34b28ff8e1ac81801402c9c5086260b4a19b11a132c56bf6bdaee99bfe815a7",
+          "receiptRef": "build:synthetic",
+          "recipeRef": "build:next-production-v1",
+          "siteFiles": [
+            {
+              "bytes": 20,
+              "hash": "sha256:97d6c774af35c81952ddb9308570a7e3622dbd4ac3c35ab821da3ee25768d4bb",
+              "path": "events/cleanup"
+            }
+          ],
+          "stagedDeploymentId": "dpl_new",
+          "staging": {
+            "receiptHash": "sha256:9844ff36b51180d1d978c2bca0b9e3d9d72799e9eeb7264abf7ad2c3e96bb7f8",
+            "receiptRef": "staging:synthetic"
+          }
+        },
+        "contract": "kapelle/website-publication/v1",
+        "expiresAt": "2026-09-11T12:00:00.000Z",
+        "generation": 1,
+        "ownerId": "owner",
+        "report": {
+          "bytes": 26,
+          "contentHash": "sha256:0c89669f8406f1a3401b6d7a712844154a583511e3b14a179a525ba830a96769",
+          "id": "report-1",
+          "reportRef": "report:synthetic",
+          "sourceRef": "source:synthetic"
+        },
+        "scopeRef": "synthetic-league",
+        "source": {
+          "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "files": [
+            {
+              "bytes": 6,
+              "hash": "sha256:41cf6794ba4200b839c53531555f0f3998df4cbb01a4d5cb0b94e3ca5e23947d",
+              "path": "src/page.tsx"
+            }
+          ],
+          "lockfile": {
+            "bytes": 4,
+            "hash": "sha256:0c030586945fe504b604ecc2e875c38ede400cd5cd73da9730302162e6b02c6f",
+            "path": "package-lock.json"
+          },
+          "repoRef": "repo:synthetic",
+          "tree": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        },
+        "target": {
+          "aliases": [
+            {
+              "aliasId": "alias_synthetic",
+              "deploymentId": "dpl_old",
+              "domain": "www.synthetic.test"
+            }
+          ],
+          "bindingRef": "website:synthetic",
+          "domains": [
+            "www.synthetic.test"
+          ],
+          "policyVersion": 1,
+          "projectId": "prj_synthetic",
+          "teamId": "team_synthetic"
+        },
+        "task": {
+          "authorityRef": "authority:synthetic",
+          "authorityTaskRef": "native-task-existing",
+          "commitmentHash": "sha256:293cebebfc7cbff68410ae842b78a9d93748e98936bbbba07a0be90686f64a82",
+          "managerTaskRef": "task-existing"
+        }
+      },
+      "name": "v1-staged",
+      "proposal": {
+        "action": "publish",
+        "artifactHash": "sha256:86cb2a3fa5d19235b6356ca19396f52147c3e934e72470a93c3d88862c26577e",
+        "contentHash": "sha256:33dd7704aaaf3881acd77e344025e015b82836ee02fb27d797c3470cdc18e8ae",
+        "contentRef": "publication:86cb2a3fa5d19235b6356ca19396f52147c3e934e72470a93c3d88862c26577e",
+        "contentVersion": 1,
+        "effectKind": "WEBSITE_PUBLICATION",
+        "expiresAt": "2026-09-11T12:00:00.000Z",
+        "recipients": [],
+        "senderConnectionRef": null,
+        "targets": [
+          {
+            "contentHash": "sha256:d2ec8a1c21c449245f71aaef479a587d9a72269f1ccb4cd393246e0686489395",
+            "documentRef": "website:synthetic",
+            "revision": 1
+          }
+        ],
+        "version": 1
+      }
+    },
+    {
+      "artifact": {
+        "contentHash": "sha256:ac40d3741d568b46e00264006eb2ba9997b428174f517321cb7b259305d95f4c",
+        "id": "publication:ac40d3741d568b46e00264006eb2ba9997b428174f517321cb7b259305d95f4c",
+        "manifest": {
+          "build": {
+            "environment": "production",
+            "outputHash": "sha256:7746d5b6a617c7429c0f8dc64c0a6ebaeee1a8d044b307f4744c40232346bac8",
+            "receiptHash": "sha256:e34b28ff8e1ac81801402c9c5086260b4a19b11a132c56bf6bdaee99bfe815a7",
+            "receiptRef": "build:synthetic",
+            "recipeRef": "build:next-production-v1",
+            "siteFiles": [
+              {
+                "bytes": 20,
+                "hash": "sha256:97d6c774af35c81952ddb9308570a7e3622dbd4ac3c35ab821da3ee25768d4bb",
+                "path": "events/cleanup"
+              }
+            ],
+            "stagedDeploymentId": "dpl_new",
+            "staging": {
+              "receiptHash": "sha256:9844ff36b51180d1d978c2bca0b9e3d9d72799e9eeb7264abf7ad2c3e96bb7f8",
+              "receiptRef": "staging:synthetic"
+            }
+          },
+          "contract": "kapelle/website-publication/v2",
+          "expiresAt": "2026-09-11T12:00:00.000Z",
+          "generation": 1,
+          "ownerId": "owner",
+          "report": {
+            "bytes": 26,
+            "contentHash": "sha256:0c89669f8406f1a3401b6d7a712844154a583511e3b14a179a525ba830a96769",
+            "id": "report-1",
+            "reportRef": "report:synthetic",
+            "sourceRef": "source:synthetic"
+          },
+          "scopeRef": "synthetic-league",
+          "source": {
+            "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "files": [
+              {
+                "bytes": 6,
+                "hash": "sha256:41cf6794ba4200b839c53531555f0f3998df4cbb01a4d5cb0b94e3ca5e23947d",
+                "path": "src/page.tsx"
+              }
+            ],
+            "lockfile": {
+              "bytes": 4,
+              "hash": "sha256:0c030586945fe504b604ecc2e875c38ede400cd5cd73da9730302162e6b02c6f",
+              "path": "package-lock.json"
+            },
+            "repoRef": "repo:synthetic",
+            "tree": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "target": {
+            "aliases": [
+              {
+                "aliasId": "alias_synthetic",
+                "deploymentId": "dpl_old",
+                "domain": "www.synthetic.test"
+              }
+            ],
+            "bindingRef": "website:synthetic",
+            "domains": [
+              "www.synthetic.test"
+            ],
+            "policyVersion": 1,
+            "projectId": "prj_synthetic",
+            "routing": {
+              "contract": "kapelle/vercel-routing/v1",
+              "deploymentAliases": [
+                "www.synthetic.test"
+              ],
+              "productionAliases": [
+                "www.synthetic.test"
+              ],
+              "projectDomains": [
+                "www.synthetic.test"
+              ],
+              "routes": [
+                {
+                  "domain": "www.synthetic.test",
+                  "kind": "direct"
+                }
+              ]
+            },
+            "teamId": "team_synthetic"
+          },
+          "task": {
+            "authorityRef": "authority:synthetic",
+            "authorityTaskRef": "native-task-existing",
+            "commitmentHash": "sha256:293cebebfc7cbff68410ae842b78a9d93748e98936bbbba07a0be90686f64a82",
+            "managerTaskRef": "task-existing"
+          }
+        },
+        "version": 1
+      },
+      "manifest": {
+        "build": {
+          "environment": "production",
+          "outputHash": "sha256:7746d5b6a617c7429c0f8dc64c0a6ebaeee1a8d044b307f4744c40232346bac8",
+          "receiptHash": "sha256:e34b28ff8e1ac81801402c9c5086260b4a19b11a132c56bf6bdaee99bfe815a7",
+          "receiptRef": "build:synthetic",
+          "recipeRef": "build:next-production-v1",
+          "siteFiles": [
+            {
+              "bytes": 20,
+              "hash": "sha256:97d6c774af35c81952ddb9308570a7e3622dbd4ac3c35ab821da3ee25768d4bb",
+              "path": "events/cleanup"
+            }
+          ],
+          "stagedDeploymentId": "dpl_new",
+          "staging": {
+            "receiptHash": "sha256:9844ff36b51180d1d978c2bca0b9e3d9d72799e9eeb7264abf7ad2c3e96bb7f8",
+            "receiptRef": "staging:synthetic"
+          }
+        },
+        "contract": "kapelle/website-publication/v2",
+        "expiresAt": "2026-09-11T12:00:00.000Z",
+        "generation": 1,
+        "ownerId": "owner",
+        "report": {
+          "bytes": 26,
+          "contentHash": "sha256:0c89669f8406f1a3401b6d7a712844154a583511e3b14a179a525ba830a96769",
+          "id": "report-1",
+          "reportRef": "report:synthetic",
+          "sourceRef": "source:synthetic"
+        },
+        "scopeRef": "synthetic-league",
+        "source": {
+          "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "files": [
+            {
+              "bytes": 6,
+              "hash": "sha256:41cf6794ba4200b839c53531555f0f3998df4cbb01a4d5cb0b94e3ca5e23947d",
+              "path": "src/page.tsx"
+            }
+          ],
+          "lockfile": {
+            "bytes": 4,
+            "hash": "sha256:0c030586945fe504b604ecc2e875c38ede400cd5cd73da9730302162e6b02c6f",
+            "path": "package-lock.json"
+          },
+          "repoRef": "repo:synthetic",
+          "tree": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        },
+        "target": {
+          "aliases": [
+            {
+              "aliasId": "alias_synthetic",
+              "deploymentId": "dpl_old",
+              "domain": "www.synthetic.test"
+            }
+          ],
+          "bindingRef": "website:synthetic",
+          "domains": [
+            "www.synthetic.test"
+          ],
+          "policyVersion": 1,
+          "projectId": "prj_synthetic",
+          "routing": {
+            "contract": "kapelle/vercel-routing/v1",
+            "deploymentAliases": [
+              "www.synthetic.test"
+            ],
+            "productionAliases": [
+              "www.synthetic.test"
+            ],
+            "projectDomains": [
+              "www.synthetic.test"
+            ],
+            "routes": [
+              {
+                "domain": "www.synthetic.test",
+                "kind": "direct"
+              }
+            ]
+          },
+          "teamId": "team_synthetic"
+        },
+        "task": {
+          "authorityRef": "authority:synthetic",
+          "authorityTaskRef": "native-task-existing",
+          "commitmentHash": "sha256:293cebebfc7cbff68410ae842b78a9d93748e98936bbbba07a0be90686f64a82",
+          "managerTaskRef": "task-existing"
+        }
+      },
+      "name": "v2-direct",
+      "proposal": {
+        "action": "publish",
+        "artifactHash": "sha256:ac40d3741d568b46e00264006eb2ba9997b428174f517321cb7b259305d95f4c",
+        "contentHash": "sha256:259ab231be77b206513a4bfd3d8841d9b6273da25f89ce2b764bf802e721affe",
+        "contentRef": "publication:ac40d3741d568b46e00264006eb2ba9997b428174f517321cb7b259305d95f4c",
+        "contentVersion": 1,
+        "effectKind": "WEBSITE_PUBLICATION",
+        "expiresAt": "2026-09-11T12:00:00.000Z",
+        "recipients": [],
+        "senderConnectionRef": null,
+        "targets": [
+          {
+            "contentHash": "sha256:9cc23ce8ca914139ac05f41c02da49618816602b5fcf3dc1e852b3fd103fc502",
+            "documentRef": "website:synthetic",
+            "revision": 1
+          }
+        ],
+        "version": 1
+      }
+    },
+    {
+      "artifact": {
+        "contentHash": "sha256:19fa3db877e61f1423520e991887027853571527e87c20fa8bdb75e435f4ccac",
+        "id": "publication:19fa3db877e61f1423520e991887027853571527e87c20fa8bdb75e435f4ccac",
+        "manifest": {
+          "build": {
+            "environment": "production",
+            "outputHash": "sha256:7746d5b6a617c7429c0f8dc64c0a6ebaeee1a8d044b307f4744c40232346bac8",
+            "receiptHash": "sha256:e34b28ff8e1ac81801402c9c5086260b4a19b11a132c56bf6bdaee99bfe815a7",
+            "receiptRef": "build:synthetic",
+            "recipeRef": "build:next-production-v1",
+            "siteFiles": [
+              {
+                "bytes": 20,
+                "hash": "sha256:97d6c774af35c81952ddb9308570a7e3622dbd4ac3c35ab821da3ee25768d4bb",
+                "path": "events/cleanup"
+              }
+            ],
+            "stagedDeploymentId": "dpl_new",
+            "staging": {
+              "receiptHash": "sha256:9844ff36b51180d1d978c2bca0b9e3d9d72799e9eeb7264abf7ad2c3e96bb7f8",
+              "receiptRef": "staging:synthetic"
+            }
+          },
+          "contract": "kapelle/website-publication/v2",
+          "expiresAt": "2026-09-11T12:00:00.000Z",
+          "generation": 1,
+          "ownerId": "owner",
+          "report": {
+            "bytes": 26,
+            "contentHash": "sha256:0c89669f8406f1a3401b6d7a712844154a583511e3b14a179a525ba830a96769",
+            "id": "report-1",
+            "reportRef": "report:synthetic",
+            "sourceRef": "source:synthetic"
+          },
+          "scopeRef": "synthetic-league",
+          "source": {
+            "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "files": [
+              {
+                "bytes": 6,
+                "hash": "sha256:41cf6794ba4200b839c53531555f0f3998df4cbb01a4d5cb0b94e3ca5e23947d",
+                "path": "src/page.tsx"
+              }
+            ],
+            "lockfile": {
+              "bytes": 4,
+              "hash": "sha256:0c030586945fe504b604ecc2e875c38ede400cd5cd73da9730302162e6b02c6f",
+              "path": "package-lock.json"
+            },
+            "repoRef": "repo:synthetic",
+            "tree": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "target": {
+            "aliases": [
+              {
+                "aliasId": "alias_generated_team",
+                "deploymentId": "dpl_old",
+                "domain": "synthetic-team.vercel.app"
+              },
+              {
+                "aliasId": "alias_apex",
+                "deploymentId": "dpl_old",
+                "domain": "synthetic.test"
+              },
+              {
+                "aliasId": "alias_generated",
+                "deploymentId": "dpl_old",
+                "domain": "synthetic.vercel.app"
+              },
+              {
+                "aliasId": "alias_synthetic",
+                "deploymentId": "dpl_old",
+                "domain": "www.synthetic.test"
+              }
+            ],
+            "bindingRef": "website:synthetic",
+            "domains": [
+              "synthetic-team.vercel.app",
+              "synthetic.test",
+              "synthetic.vercel.app",
+              "www.synthetic.test"
+            ],
+            "policyVersion": 1,
+            "projectId": "prj_synthetic",
+            "routing": {
+              "contract": "kapelle/vercel-routing/v1",
+              "deploymentAliases": [
+                "synthetic-team.vercel.app",
+                "synthetic.test",
+                "synthetic.vercel.app",
+                "www.synthetic.test"
+              ],
+              "productionAliases": [
+                "synthetic-team.vercel.app"
+              ],
+              "projectDomains": [
+                "synthetic.test",
+                "synthetic.vercel.app",
+                "www.synthetic.test"
+              ],
+              "routes": [
+                {
+                  "domain": "synthetic-team.vercel.app",
+                  "kind": "direct"
+                },
+                {
+                  "configuredStatus": null,
+                  "destination": "www.synthetic.test",
+                  "domain": "synthetic.test",
+                  "kind": "redirect",
+                  "pathPolicy": "preserve-path-and-query",
+                  "status": 307
+                },
+                {
+                  "domain": "synthetic.vercel.app",
+                  "kind": "direct"
+                },
+                {
+                  "domain": "www.synthetic.test",
+                  "kind": "direct"
+                }
+              ]
+            },
+            "teamId": "team_synthetic"
+          },
+          "task": {
+            "authorityRef": "authority:synthetic",
+            "authorityTaskRef": "native-task-existing",
+            "commitmentHash": "sha256:293cebebfc7cbff68410ae842b78a9d93748e98936bbbba07a0be90686f64a82",
+            "managerTaskRef": "task-existing"
+          }
+        },
+        "version": 1
+      },
+      "manifest": {
+        "build": {
+          "environment": "production",
+          "outputHash": "sha256:7746d5b6a617c7429c0f8dc64c0a6ebaeee1a8d044b307f4744c40232346bac8",
+          "receiptHash": "sha256:e34b28ff8e1ac81801402c9c5086260b4a19b11a132c56bf6bdaee99bfe815a7",
+          "receiptRef": "build:synthetic",
+          "recipeRef": "build:next-production-v1",
+          "siteFiles": [
+            {
+              "bytes": 20,
+              "hash": "sha256:97d6c774af35c81952ddb9308570a7e3622dbd4ac3c35ab821da3ee25768d4bb",
+              "path": "events/cleanup"
+            }
+          ],
+          "stagedDeploymentId": "dpl_new",
+          "staging": {
+            "receiptHash": "sha256:9844ff36b51180d1d978c2bca0b9e3d9d72799e9eeb7264abf7ad2c3e96bb7f8",
+            "receiptRef": "staging:synthetic"
+          }
+        },
+        "contract": "kapelle/website-publication/v2",
+        "expiresAt": "2026-09-11T12:00:00.000Z",
+        "generation": 1,
+        "ownerId": "owner",
+        "report": {
+          "bytes": 26,
+          "contentHash": "sha256:0c89669f8406f1a3401b6d7a712844154a583511e3b14a179a525ba830a96769",
+          "id": "report-1",
+          "reportRef": "report:synthetic",
+          "sourceRef": "source:synthetic"
+        },
+        "scopeRef": "synthetic-league",
+        "source": {
+          "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "files": [
+            {
+              "bytes": 6,
+              "hash": "sha256:41cf6794ba4200b839c53531555f0f3998df4cbb01a4d5cb0b94e3ca5e23947d",
+              "path": "src/page.tsx"
+            }
+          ],
+          "lockfile": {
+            "bytes": 4,
+            "hash": "sha256:0c030586945fe504b604ecc2e875c38ede400cd5cd73da9730302162e6b02c6f",
+            "path": "package-lock.json"
+          },
+          "repoRef": "repo:synthetic",
+          "tree": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        },
+        "target": {
+          "aliases": [
+            {
+              "aliasId": "alias_generated_team",
+              "deploymentId": "dpl_old",
+              "domain": "synthetic-team.vercel.app"
+            },
+            {
+              "aliasId": "alias_apex",
+              "deploymentId": "dpl_old",
+              "domain": "synthetic.test"
+            },
+            {
+              "aliasId": "alias_generated",
+              "deploymentId": "dpl_old",
+              "domain": "synthetic.vercel.app"
+            },
+            {
+              "aliasId": "alias_synthetic",
+              "deploymentId": "dpl_old",
+              "domain": "www.synthetic.test"
+            }
+          ],
+          "bindingRef": "website:synthetic",
+          "domains": [
+            "synthetic-team.vercel.app",
+            "synthetic.test",
+            "synthetic.vercel.app",
+            "www.synthetic.test"
+          ],
+          "policyVersion": 1,
+          "projectId": "prj_synthetic",
+          "routing": {
+            "contract": "kapelle/vercel-routing/v1",
+            "deploymentAliases": [
+              "synthetic-team.vercel.app",
+              "synthetic.test",
+              "synthetic.vercel.app",
+              "www.synthetic.test"
+            ],
+            "productionAliases": [
+              "synthetic-team.vercel.app"
+            ],
+            "projectDomains": [
+              "synthetic.test",
+              "synthetic.vercel.app",
+              "www.synthetic.test"
+            ],
+            "routes": [
+              {
+                "domain": "synthetic-team.vercel.app",
+                "kind": "direct"
+              },
+              {
+                "configuredStatus": null,
+                "destination": "www.synthetic.test",
+                "domain": "synthetic.test",
+                "kind": "redirect",
+                "pathPolicy": "preserve-path-and-query",
+                "status": 307
+              },
+              {
+                "domain": "synthetic.vercel.app",
+                "kind": "direct"
+              },
+              {
+                "domain": "www.synthetic.test",
+                "kind": "direct"
+              }
+            ]
+          },
+          "teamId": "team_synthetic"
+        },
+        "task": {
+          "authorityRef": "authority:synthetic",
+          "authorityTaskRef": "native-task-existing",
+          "commitmentHash": "sha256:293cebebfc7cbff68410ae842b78a9d93748e98936bbbba07a0be90686f64a82",
+          "managerTaskRef": "task-existing"
+        }
+      },
+      "name": "v2-routed",
+      "proposal": {
+        "action": "publish",
+        "artifactHash": "sha256:19fa3db877e61f1423520e991887027853571527e87c20fa8bdb75e435f4ccac",
+        "contentHash": "sha256:50b223c0c22fa6c9c41c8ab38d264a6dead0979a1f1aca6eda0336d19a5d3460",
+        "contentRef": "publication:19fa3db877e61f1423520e991887027853571527e87c20fa8bdb75e435f4ccac",
+        "contentVersion": 1,
+        "effectKind": "WEBSITE_PUBLICATION",
+        "expiresAt": "2026-09-11T12:00:00.000Z",
+        "recipients": [],
+        "senderConnectionRef": null,
+        "targets": [
+          {
+            "contentHash": "sha256:2af2b2f442c816e26e223e885db4cda44fbe9163d785b1e3ff767154a763ad27",
+            "documentRef": "website:synthetic",
+            "revision": 1
+          }
+        ],
+        "version": 1
+      }
+    }
+  ]
+}

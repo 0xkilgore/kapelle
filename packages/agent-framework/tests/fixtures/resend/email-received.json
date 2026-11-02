@@ -1,0 +1,19 @@
+{
+  "type": "email.received",
+  "created_at": "2026-10-15T14:29:39.000Z",
+  "data": {
+    "email_id": "56761188-7520-42d8-8898-ff6fc54ce618",
+    "created_at": "2026-10-15T14:29:39.000Z",
+    "from": "alex@exna.test",
+    "to": ["__INTAKE_ADDRESS__"],
+    "bcc": [],
+    "cc": [],
+    "received_for": [],
+    "message_id": "<example+123>",
+    "subject": "October meeting notes",
+    "attachments": [
+      { "id": "2a0c9ce0-3112-4728-976e-47ddcd16a318", "filename": "agenda.md", "content_type": "text/markdown", "content_disposition": "attachment", "content_id": null },
+      { "id": "9b1fa2c3-0000-4000-8000-000000000002", "filename": "flyer.pdf", "content_type": "application/pdf", "content_disposition": "attachment", "content_id": null }
+    ]
+  }
+}

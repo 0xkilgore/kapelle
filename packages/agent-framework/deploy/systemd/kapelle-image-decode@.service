@@ -1,0 +1,51 @@
+# IMAGES-V1 I1: one image decode (one connection of kapelle-image-decode@<org>.socket). No arguments, no file paths, no org
+# data: a throwaway DynamicUser with no network, no writable or org paths, bounded memory, tasks and time. sharp/libvips
+# (the only native code in Kapelle) runs only here, from /opt/kapelle/current/decoder (pinned in decoder/package-lock.json).
+# Qualify on the target host before enabling images: the properties below, denied egress, and the fixture suite.
+[Unit]
+Description=Kapelle image decoder (one connection)
+CollectMode=inactive-or-failed
+
+[Service]
+Type=simple
+ExecStart=/opt/node/bin/node /opt/kapelle/current/decoder/decode.mjs
+StandardInput=socket
+StandardOutput=socket
+StandardError=journal
+DynamicUser=yes
+UMask=0077
+# No network at all (the connection arrives as an inherited fd): no interfaces, Unix sockets only, no IP traffic.
+PrivateNetwork=yes
+RestrictAddressFamilies=AF_UNIX
+IPAddressDeny=any
+# Nothing of the host is writable or visible beyond the code it runs.
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+PrivateDevices=yes
+# '-' = a path that does not exist on this host is ignored (systemd otherwise fails the namespace setup: status=226/NAMESPACE on a
+# fresh host, Director's rehearsal Oct 23); where it exists it is hidden exactly as before.
+InaccessiblePaths=-/etc/kapelle -/var/lib/kapelle -/var/lib/kapelle-hub -/var/backups/kapelle -/run/kapelle-access
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectKernelLogs=yes
+ProtectControlGroups=yes
+ProtectClock=yes
+ProtectHostname=yes
+ProtectProc=invisible
+ProcSubset=pid
+NoNewPrivileges=yes
+CapabilityBoundingSet=
+RestrictNamespaces=yes
+RestrictRealtime=yes
+RestrictSUIDSGID=yes
+LockPersonality=yes
+SystemCallFilter=@system-service
+SystemCallArchitectures=native
+# Bounds (Node needs a writable+executable JIT, so MemoryDenyWriteExecute stays off).
+MemoryMax=256M
+MemorySwapMax=0
+TasksMax=16
+CPUQuota=100%
+RuntimeMaxSec=10s
+Environment=NODE_ENV=production

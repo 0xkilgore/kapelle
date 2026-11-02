@@ -1,0 +1,26 @@
+# Nightly per-org backup (%i = org id): a fresh, verified set through the org's Ops socket, then an encrypted off-host copy with
+# restic (NEW DEPENDENCY: owner OK required), then retention on the remote. Local retention is the runtime's own `backup.keep`.
+[Unit]
+Description=Kapelle nightly backup + off-host copy (%i)
+Requires=kapelle-org@%i.service
+After=kapelle-org@%i.service
+
+[Service]
+Type=oneshot
+User=kapelle-%i
+Group=kapelle-%i
+# RESTIC_REPOSITORY, RESTIC_PASSWORD_FILE, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY (S3-compatible bucket). 0600, owned by kapelle-%i.
+EnvironmentFile=/etc/kapelle/secrets/%i/restic.env
+ExecStart=/opt/node/bin/node /opt/kapelle/current/bin/backup-cli.mjs backup /etc/kapelle/orgs/%i.json
+ExecStart=/usr/bin/restic backup --tag kapelle --tag %i --host kapelle-%i /var/backups/kapelle/%i
+ExecStart=/usr/bin/restic forget --tag %i --host kapelle-%i --keep-daily 14 --keep-weekly 8 --keep-monthly 6 --prune
+UMask=0077
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+ReadOnlyPaths=/etc/kapelle /var/backups/kapelle/%i
+# restic's local cache
+CacheDirectory=kapelle-restic/%i
+Environment=RESTIC_CACHE_DIR=/var/cache/kapelle-restic/%i

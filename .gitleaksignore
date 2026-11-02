@@ -1,0 +1,9 @@
+# Reviewed synthetic test fixtures (gitleaks fingerprints: path:rule:line). Each release re-reviews this list; a moved line
+# turns the secret gate red until it is re-reviewed. None of these is a credential.
+# agent-kit-scope.test.ts: the secret-screening fixture forms ("abcdefghijklmnop1234", "correcthorsebattery") the reader must refuse.
+packages/agent-framework/tests/agent-kit-scope.test.ts:generic-api-key:75
+packages/agent-framework/tests/agent-kit-scope.test.ts:generic-api-key:76
+# org-resend.test.ts: Svix's published example webhook secret and message (svix.com docs, timestamp 1614265330).
+packages/agent-framework/tests/org-resend.test.ts:generic-api-key:24
+# totp.test.ts: the RFC 6238 test secret (base32 of "12345678901234567890").
+packages/agent-framework/tests/totp.test.ts:generic-api-key:51

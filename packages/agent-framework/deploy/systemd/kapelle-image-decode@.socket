@@ -1,0 +1,18 @@
+# IMAGES-V1 I1: the image decoder socket for ONE org (%i = org id). Only the org's user may connect (0600). Each connection
+# starts ONE fresh, sandboxed decoder instance (kapelle-image-decode@.service) with the connection as its stdin/stdout:
+# the original's bytes in, one header line + the normalized JPEG out. One connection at a time per org (the runtime queues).
+[Unit]
+Description=Kapelle image decoder socket (%i)
+
+[Socket]
+ListenStream=/run/kapelle-images/%i.sock
+SocketUser=kapelle-%i
+SocketGroup=kapelle-%i
+SocketMode=0600
+DirectoryMode=0755
+Accept=yes
+MaxConnections=1
+RemoveOnStop=yes
+
+[Install]
+WantedBy=sockets.target

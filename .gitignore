@@ -1,0 +1,23 @@
+# dependencies and build output
+node_modules/
+dist/
+.next/
+coverage/
+*.tsbuildinfo
+__pycache__/
+.vite/
+
+# private state: never commit (per the release security scan)
+.workspace/
+.worktrees/
+.ops-*/
+output/
+*.env
+.env*
+auth.env
+*.sqlite
+*.sqlite*
+*.db
+*.pem
+*.key
+.DS_Store

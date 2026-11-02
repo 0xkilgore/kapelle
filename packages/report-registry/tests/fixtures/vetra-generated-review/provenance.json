@@ -1,0 +1,16 @@
+{
+  "capturedAt": "2026-08-22T20:04:33.176Z",
+  "source": "ephemeral local Vetra 6.2.1 MCP runtime",
+  "sourceCommit": "b818470",
+  "generationCommand": "ph-cli generate all",
+  "documentModel": "kilgore/report",
+  "operationsProved": [
+    "MARK_OPENED",
+    "MARK_READ",
+    "ADD_FEEDBACK",
+    "DISMISS_ATTENTION",
+    "RESOLVE_ATTENTION"
+  ],
+  "syntheticOnly": true,
+  "note": "Generated from the Registry source checkout in a temporary local runtime; no private report content and no live Registry mutation."
+}
